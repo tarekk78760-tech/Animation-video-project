@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<title>বিকাশ বনাম বাংলা QR</title>
+<style>
+@font-face{font-family:Baloo;font-weight:800;src:url(assets/fonts/baloo-da-2-bengali-800-normal.woff2)}
+@font-face{font-family:Baloo;font-weight:800;src:url(assets/fonts/baloo-da-2-latin-800-normal.woff2);unicode-range:U+0000-00FF}
+@font-face{font-family:Baloo;font-weight:700;src:url(assets/fonts/baloo-da-2-bengali-700-normal.woff2)}
+@font-face{font-family:Baloo;font-weight:700;src:url(assets/fonts/baloo-da-2-latin-700-normal.woff2);unicode-range:U+0000-00FF}
+@font-face{font-family:Anek;font-weight:800;src:url(assets/fonts/anek-bangla-bengali-800-normal.woff2)}
+@font-face{font-family:Anek;font-weight:800;src:url(assets/fonts/anek-bangla-latin-800-normal.woff2);unicode-range:U+0000-00FF}
+@font-face{font-family:Hind;font-weight:500;src:url(assets/fonts/hind-siliguri-bengali-500-normal.woff2)}
+@font-face{font-family:Hind;font-weight:500;src:url(assets/fonts/hind-siliguri-latin-500-normal.woff2);unicode-range:U+0000-00FF}
+@font-face{font-family:Hind;font-weight:600;src:url(assets/fonts/hind-siliguri-bengali-600-normal.woff2)}
+@font-face{font-family:Hind;font-weight:600;src:url(assets/fonts/hind-siliguri-latin-600-normal.woff2);unicode-range:U+0000-00FF}
+@font-face{font-family:Hind;font-weight:700;src:url(assets/fonts/hind-siliguri-bengali-700-normal.woff2)}
+@font-face{font-family:Hind;font-weight:700;src:url(assets/fonts/hind-siliguri-latin-700-normal.woff2);unicode-range:U+0000-00FF}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:Hind,sans-serif}
+.scene{position:absolute;inset:0;overflow:hidden;display:none}
+.scene.cream{background:radial-gradient(120% 80% at 30% 20%,#fbf7ea 0%,#f1e9d0 60%,#e6dcbc 100%);color:#121212;--fg:#121212;--ac:#e0102a;--ac2:#0b7a35;--line:rgba(0,0,0,.16);--wm:rgba(0,0,0,.055);--sub:#5d5541}
+.scene.green{background:radial-gradient(120% 90% at 30% 15%,#16934a 0%,#0b6f31 55%,#064d21 100%);color:#fff;--fg:#fff;--ac:#ffc93c;--ac2:#ffc93c;--line:rgba(255,255,255,.22);--wm:rgba(255,255,255,.07);--sub:#cfe9d6}
+.scene.black{background:radial-gradient(110% 80% at 50% 25%,#1d1d1f 0%,#0c0c0d 60%,#050505 100%);color:#fff;--fg:#fff;--ac:#ffc414;--ac2:#ff2a3d;--line:rgba(255,255,255,.18);--wm:rgba(255,255,255,.06);--sub:#a9a9b0}
+.scene.yellow{background:radial-gradient(120% 90% at 30% 15%,#ffd23f 0%,#f6b915 55%,#e39f08 100%);color:#121212;--fg:#121212;--ac:#d10f24;--ac2:#121212;--line:rgba(0,0,0,.18);--wm:rgba(0,0,0,.07);--sub:#5a4206}
+.scene::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 70px,transparent 70px 140px);pointer-events:none}
+.scene.cream::after{content:"";position:absolute;right:30px;top:140px;width:330px;height:260px;background-image:radial-gradient(rgba(0,0,0,.13) 2.5px,transparent 3px);background-size:26px 26px;pointer-events:none}
+
+.hdr{position:absolute;left:60px;right:60px;top:52px;height:60px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--line);font:700 26px Hind;letter-spacing:4px;color:var(--fg)}
+.hdr .b::before{content:"";display:inline-block;width:14px;height:14px;border-radius:50%;background:#f39200;margin-right:14px;vertical-align:2px}
+.hdr .n{letter-spacing:2px;opacity:.8}
+.wm{position:absolute;right:-30px;bottom:-170px;font:800 560px/1 Baloo;color:var(--wm);pointer-events:none}
+.foot{position:absolute;left:0;right:0;top:1680px;text-align:center;color:var(--fg);opacity:.9}
+.foot .w{font:400 58px Georgia,"DejaVu Serif",serif;letter-spacing:1px}
+.foot .w i{color:#f39200;font-style:normal}
+.foot .t{font:500 22px Hind;opacity:.6;margin-top:-4px}
+
+.a{position:absolute;will-change:transform,opacity}
+.h{font:800 112px/1.18 Baloo;color:var(--fg);white-space:nowrap}
+.h em{font-style:normal;color:var(--ac)}
+.h u{text-decoration:none;color:var(--ac2)}
+.pill{display:inline-block;padding:10px 34px 4px;border-radius:60px;font:800 52px/1.25 Baloo;white-space:nowrap}
+.pill.y{background:#ffc414;color:#111;border:4px solid #111}
+.pill.k{background:#111;color:#ffc414}
+.pill.w{background:#fff;color:#111;border:4px solid #111}
+.pill.r{background:#e0102a;color:#fff}
+.pill.g{background:#0b7a35;color:#fff}
+.card{background:#fff;border:8px solid #111;border-radius:34px;box-shadow:16px 16px 0 #111}
+.big{font:800 220px/1.1 Baloo;white-space:nowrap;text-align:center}
+.tile{width:250px;height:250px;padding:16px}
+.tile .in{width:100%;height:100%;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font:800 66px/1.1 Baloo}
+.tile .in small{font:700 30px Hind;opacity:.9}
+.row{display:flex;align-items:center;gap:28px;padding:22px 30px;width:960px}
+.row .num{font:800 96px/1 Baloo;color:#e0102a;min-width:130px}
+.row .tx{font:800 52px/1.2 Baloo;color:#111;flex:1}
+.row .tx small{display:block;font:600 32px Hind;color:#555}
+.ico{width:120px;height:120px}
+
+#cap{position:absolute;z-index:100;left:60px;width:960px;top:1352px;min-height:200px;background:rgba(24,24,30,.94);border:2px solid rgba(255,255,255,.08);border-radius:26px;padding:26px 34px 20px;text-align:center;font:600 47px/1.48 Hind;color:#8c8c96;box-shadow:0 18px 40px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center}
+#cap span{transition:none}
+#cap .p{color:#fff}
+#cap .k{color:#ffc414}
+#cap .c{color:#ffc414}
+#prog{position:absolute;z-index:100;left:60px;width:960px;top:1616px;height:6px;border-radius:3px;background:rgba(140,140,140,.35)}
+#prog i{position:absolute;left:0;top:0;bottom:0;background:#ffc414;border-radius:3px}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script src="assets/words.js"></script>
+<script>
+/* ======================== CONFIG ======================== */
+const BRAND = 'DIGITAL DESK';        // header label (change to your channel name)
+const BRAND_WORD = 'Digital Desk';   // footer wordmark
+const BRAND_TAG = 'সহজ ভাষায় খবরের ভেতরের খবর';
+const TAIL = 1.4;                    // seconds after the voice ends
+const DURATION = WORDS.duration + TAIL;
+
+/* ======================== WORD TIMING ======================== */
+const WL = WORDS.words;
+const clean = s => s.replace(/[,!?।.]/g, '');
+// start time of the first word containing `txt` at/after time `after`
+function at(txt, after = 0) {
+  const w = WL.find(w => w.s >= after - 0.01 && (clean(w.w) === txt || clean(w.w).includes(txt)));
+  if (!w) { console.warn('word not found', txt, after); return after; }
+  return w.s;
+}
+function endOf(txt, after = 0) { const w = WL.find(w => w.s >= after - 0.01 && clean(w.w).includes(txt)); return w ? w.e : after; }
+
+/* ======================== EASING ======================== */
+const cl = v => Math.max(0, Math.min(1, v));
+const E = {
+  lin: p => p,
+  out: p => 1 - Math.pow(1 - p, 3),
+  out5: p => 1 - Math.pow(1 - p, 5),
+  io: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+  back: p => { const c1 = 1.9, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+  el: p => p === 0 ? 0 : p === 1 ? 1 : Math.pow(2, -9 * p) * Math.sin((p * 10 - .75) * (2 * Math.PI / 3)) + 1,
+};
+const lerp = (a, b, p) => a + (b - a) * p;
+
+/* ======================== ANIMATION TYPES ======================== */
+// each returns props for progress p (0..1). additive types are applied only while active.
+const ANIM = {
+  pop:   p => ({ s: Math.max(0, E.back(p)), o: cl(p * 4) }),
+  popel: p => ({ s: Math.max(0, E.el(p)), o: cl(p * 5) }),
+  fade:  p => ({ o: E.out(p) }),
+  up:    (p, o) => ({ y: (1 - E.out(p)) * (o.d || 90), o: cl(p * 2) }),
+  down:  (p, o) => ({ y: -(1 - E.out(p)) * (o.d || 90), o: cl(p * 2) }),
+  fromL: (p, o) => ({ x: -(1 - E.out5(p)) * (o.d || 900), o: cl(p * 3) }),
+  fromR: (p, o) => ({ x: (1 - E.out5(p)) * (o.d || 900), o: cl(p * 3) }),
+  stamp: (p, o) => ({ s: lerp(o.from || 2.6, 1, E.out5(p)), o: cl(p * 3), r: o.r || 0 }),
+  out:   p => ({ o: 1 - E.out(p), s: 1 - .12 * E.out(p) }),
+  outUp: p => ({ o: 1 - E.out(p), y: -70 * E.out(p) }),
+  wipe:  p => ({ clip: E.io(p) }),
+  draw:  p => ({ dash: E.io(p) }),
+  to:    (p, o) => { const e = (o.ease || E.io)(p), r = {}; for (const k in o.to) r[k] = lerp(o.from[k], o.to[k], e); return r; },
+  count: (p, o) => ({ num: lerp(o.from || 0, o.to, E.out(p)) }),
+  // additive
+  shake:  (p, o) => ({ x: Math.sin(p * 55) * (o.a || 22) * (1 - p), _add: 1 }),
+  wobble: (p, o) => ({ r: Math.sin(p * Math.PI * 5) * (o.a || 9) * (1 - p), _add: 1 }),
+  pulse:  (p, o) => ({ s: Math.sin(p * Math.PI) * (o.a || .1), _add: 1 }),
+  float:  (p, o) => ({ y: Math.sin(p * Math.PI * 2 * (o.n || 2)) * (o.a || 10), _add: 1 }),
+  spin:   (p, o) => ({ r: p * (o.a || 360), _add: 1 }),
+};
+const ADDITIVE = new Set(['shake', 'wobble', 'pulse', 'float', 'spin']);
+
+/* ======================== SCENE GRAPH ======================== */
+const stage = document.getElementById('stage');
+const SCENES = [], NODES = [], SFX = [];
+const BN = n => String(n).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+let curScene = null;
+
+function sfx(t, type, vol = 1) { SFX.push({ t: +t.toFixed(3), type, vol }); }
+
+function scene(start, theme, num) {
+  const root = document.createElement('div');
+  root.className = 'scene ' + theme;
+  root.innerHTML = `<div class="wm">${BN(num)}</div>
+    <div class="hdr"><span class="b">${BRAND}</span><span class="n">${BN(String(num).padStart(2,'0'))} / ${BN(13)}</span></div>
+    <div class="foot"><div class="w">${BRAND_WORD}<i>.</i></div><div class="t">${BRAND_TAG}</div></div>`;
+  stage.appendChild(root);
+  const s = { start, theme, num, root };
+  SCENES.push(s); curScene = s;
+  if (start > 0) sfx(start - 0.05, 'whoosh', .55);
+  return s;
+}
+
+// add element. pos: {x,y} = anchor point; anchor 'c' (center) or 'l' (left-middle) or 'lt'
+function add(html, x, y, opt = {}) {
+  const el = document.createElement('div');
+  el.className = 'a ' + (opt.cls || '');
+  el.innerHTML = html;
+  el.style.left = x + 'px'; el.style.top = y + 'px';
+  if (opt.w) el.style.width = opt.w + 'px';
+  if (opt.css) el.style.cssText += opt.css;
+  (opt.parent || curScene.root).appendChild(el);
+  const n = { el, tw: [], anchor: opt.anchor || 'c', z: opt.z };
+  if (opt.z) el.style.zIndex = opt.z;
+  NODES.push(n);
+  el._n = n;
+  return n;
+}
+// tween: A(node, type, t0, dur, opts)
+function A(n, type, t0, dur = .5, o = {}) { n.tw.push({ type, t0, dur, o }); n.tw.sort((a, b) => a.t0 - b.t0); return n; }
+
+function applyNode(n, t) {
+  const st = { x: 0, y: 0, s: 1, r: 0, o: 1, clip: 1, dash: 1, num: null };
+  const touched = new Set(); const addv = { x: 0, y: 0, s: 0, r: 0 };
+  for (const tw of n.tw) {
+    const p = cl((t - tw.t0) / tw.dur);
+    if (ADDITIVE.has(tw.type)) {
+      if (t >= tw.t0 && t <= tw.t0 + tw.dur) { const v = ANIM[tw.type](p, tw.o); for (const k in v) if (k !== '_add') addv[k] += v[k]; }
+      continue;
+    }
+    const v = ANIM[tw.type](p, tw.o);
+    for (const k in v) { if (t >= tw.t0 || !touched.has(k)) st[k] = v[k]; touched.add(k); }
+  }
+  const el = n.el;
+  const x = st.x + addv.x, y = st.y + addv.y, s = st.s + addv.s, r = st.r + addv.r;
+  const base = n.anchor === 'c' ? 'translate(-50%,-50%) ' : n.anchor === 'l' ? 'translate(0,-50%) ' : '';
+  el.style.transform = `${base}translate(${x}px,${y}px) rotate(${r}deg) scale(${s})`;
+  el.style.opacity = st.o;
+  el.style.visibility = st.o <= 0.001 ? 'hidden' : 'visible';
+  el.style.clipPath = st.clip < 1 ? `inset(-20% ${(1 - st.clip) * 100}% -20% -2%)` : 'none';
+  if (n.paths) for (const p of n.paths) p.style.strokeDashoffset = 1 - st.dash;
+  if (st.num !== null && n.fmt) n.numEl.textContent = n.fmt(st.num);
+}
+
+/* ======================== GRAPHICS ======================== */
+function rng(seed) { let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+function qrSVG(size, color = '#0b7a35', seed = 7, mid = true) {
+  const N = 25, r = rng(seed), m = size / N; let out = '';
+  const inF = (i, j) => (i < 8 && j < 8) || (i > N - 9 && j < 8) || (i < 8 && j > N - 9);
+  const inMid = (i, j) => mid && i > 8 && i < 16 && j > 9 && j < 15;
+  for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) {
+    if (inF(i, j) || inMid(i, j)) continue;
+    if (r() > .52) out += `<rect x="${i * m}" y="${j * m}" width="${m + .4}" height="${m + .4}" rx="${m * .18}"/>`;
+  }
+  const fp = (x, y) => `<rect x="${x * m + m / 2}" y="${y * m + m / 2}" width="${6 * m}" height="${6 * m}" rx="${m * 1.2}" fill="none" stroke="${color}" stroke-width="${m}"/><rect x="${(x + 2) * m}" y="${(y + 2) * m}" width="${3 * m}" height="${3 * m}" rx="${m * .5}"/>`;
+  const midBox = mid ? `<rect x="${9.3 * m}" y="${10.2 * m}" width="${6.4 * m}" height="${4.6 * m}" rx="${m}" fill="#fff" stroke="#e0102a" stroke-width="${m * .55}"/><text x="${12.5 * m}" y="${13.65 * m}" text-anchor="middle" font-family="Baloo" font-weight="800" font-size="${3.2 * m}" fill="#e0102a">QR</text>` : '';
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" fill="${color}">${out}${fp(0, 0)}${fp(N - 7, 0)}${fp(0, N - 7)}${midBox}</svg>`;
+}
+// Bangla QR style card
+function bqr(size, shadow = '#0b7a35') {
+  const q = size * .78;
+  return `<div class="card" style="width:${size}px;padding:${size * .07}px ${size * .08}px ${size * .09}px;box-shadow:${size * .045}px ${size * .045}px 0 ${shadow};display:flex;flex-direction:column;align-items:center">
+    <div style="font:800 ${size * .15}px/1.1 Baloo;color:#e0102a;letter-spacing:1px;margin-bottom:${size * .02}px">বাংলা <span style="color:#0b7a35">QR</span></div>
+    ${qrSVG(q, '#0b7a35', 11)}</div>`;
+}
+function tile(name, bg, sub = '', size = 250, icon = '') {
+  return `<div class="card tile" style="width:${size}px;height:${size}px;padding:${size * .065}px;box-shadow:${size * .055}px ${size * .055}px 0 #111;border-radius:${size * .15}px">
+    <div class="in" style="background:${bg};font-size:${size * .25}px;border-radius:${size * .09}px">${icon}${name}${sub ? `<small style="font-size:${size * .11}px">${sub}</small>` : ''}</div></div>`;
+}
+const IC = {
+  bank: (c = '#fff', s = 90) => `<svg width="${s}" height="${s}" viewBox="0 0 64 64" fill="${c}"><path d="M32 6 4 20v6h56v-6z"/><rect x="9" y="29" width="7" height="22" rx="1.5"/><rect x="22" y="29" width="7" height="22" rx="1.5"/><rect x="35" y="29" width="7" height="22" rx="1.5"/><rect x="48" y="29" width="7" height="22" rx="1.5"/><rect x="4" y="53" width="56" height="7" rx="2"/></svg>`,
+  phone: (c = '#fff', s = 90) => `<svg width="${s}" height="${s}" viewBox="0 0 64 64"><rect x="16" y="4" width="32" height="56" rx="7" fill="${c}"/><rect x="20" y="11" width="24" height="38" rx="2" fill="rgba(0,0,0,.25)"/><circle cx="32" cy="54" r="2.6" fill="rgba(0,0,0,.35)"/></svg>`,
+  warn: (s = 150) => `<svg width="${s}" height="${s}" viewBox="0 0 64 64"><path d="M32 5 61 57H3z" fill="#ffc414" stroke="#111" stroke-width="4" stroke-linejoin="round"/><rect x="29" y="22" width="6" height="20" rx="3" fill="#111"/><circle cx="32" cy="49" r="3.6" fill="#111"/></svg>`,
+  check: (s = 120, c = '#14a44d') => `<svg width="${s}" height="${s}" viewBox="0 0 64 64"><circle cx="32" cy="32" r="29" fill="${c}" stroke="#111" stroke-width="4"/><path d="M18 33l9 9 19-20" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="dp"/></svg>`,
+  cross: (s = 120) => `<svg width="${s}" height="${s}" viewBox="0 0 64 64"><circle cx="32" cy="32" r="29" fill="#e0102a" stroke="#111" stroke-width="4"/><path d="M21 21l22 22M43 21 21 43" stroke="#fff" stroke-width="7" stroke-linecap="round"/></svg>`,
+  mag: (s = 200, c = '#111') => `<svg width="${s}" height="${s}" viewBox="0 0 64 64"><circle cx="26" cy="26" r="17" fill="rgba(255,255,255,.25)" stroke="${c}" stroke-width="6"/><path d="M39 39l18 18" stroke="${c}" stroke-width="9" stroke-linecap="round"/></svg>`,
+  angry: (s = 260) => `<svg width="${s}" height="${s}" viewBox="0 0 64 64"><circle cx="32" cy="32" r="29" fill="#ffc414" stroke="#111" stroke-width="3.5"/><path d="M16 22l11 5M48 22l-11 5" stroke="#111" stroke-width="4" stroke-linecap="round"/><circle cx="23" cy="31" r="3.6" fill="#111"/><circle cx="41" cy="31" r="3.6" fill="#111"/><path d="M20 48q12-10 24 0" fill="none" stroke="#111" stroke-width="4.5" stroke-linecap="round"/><path d="M50 8c4 2 6 6 5 10" stroke="#e0102a" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>`,
+  scale: (s = 100, c = '#111') => `<svg width="${s}" height="${s}" viewBox="0 0 64 64" fill="none" stroke="${c}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8v48M18 56h28M10 16h44"/><path d="M10 16 3 34h14zM54 16l-7 18h14z" fill="${c}"/></svg>`,
+  refund: (s = 100, c = '#111') => `<svg width="${s}" height="${s}" viewBox="0 0 64 64" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M50 22A21 21 0 1 0 53 38"/><path d="M52 8v15H37"/><text x="32" y="41" text-anchor="middle" font-family="Hind" font-weight="700" font-size="24" fill="${c}" stroke="none">৳</text></svg>`,
+  bolt: (s = 100) => `<svg width="${s}" height="${s}" viewBox="0 0 64 64"><path d="M37 3 9 37h20l-4 24 30-36H35z" fill="#ffc414" stroke="#111" stroke-width="4" stroke-linejoin="round"/></svg>`,
+  store: (s = 110, c = '#e0102a') => `<svg width="${s}" height="${s}" viewBox="0 0 64 64"><rect x="8" y="26" width="48" height="32" rx="3" fill="#fff" stroke="#111" stroke-width="4"/><path d="M6 12h52l2 14H4z" fill="${c}" stroke="#111" stroke-width="4" stroke-linejoin="round"/><path d="M19 12l-3 14M32 12v14M45 12l3 14" stroke="#fff" stroke-width="4"/><rect x="25" y="38" width="14" height="20" fill="#111"/></svg>`,
+  chat: (s = 260) => `<svg width="${s}" height="${s}" viewBox="0 0 64 64"><path d="M8 8h48a4 4 0 0 1 4 4v30a4 4 0 0 1-4 4H26L14 58V46H8a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4z" fill="#14a44d"/><circle cx="20" cy="27" r="4.5" fill="#fff"/><circle cx="32" cy="27" r="4.5" fill="#fff"/><circle cx="44" cy="27" r="4.5" fill="#fff"/></svg>`,
+  arrowUp: (s = 120, c = '#14a44d') => `<svg width="${s}" height="${s}" viewBox="0 0 64 64"><path d="M32 4 56 30H42v30H22V30H8z" fill="${c}" stroke="#111" stroke-width="4" stroke-linejoin="round"/></svg>`,
+  arrowDn: (s = 120, c = '#e0102a') => `<svg width="${s}" height="${s}" viewBox="0 0 64 64"><path d="M32 60 8 34h14V4h20v30h14z" fill="${c}" stroke="#111" stroke-width="4" stroke-linejoin="round"/></svg>`,
+  people: (s = 120, c = '#111') => `<svg width="${s}" height="${s}" viewBox="0 0 64 64" fill="${c}"><circle cx="22" cy="20" r="9"/><circle cx="44" cy="22" r="7.5"/><path d="M5 54c0-12 8-20 17-20s17 8 17 20z"/><path d="M36 54c0-6-2-11-5-15 3-3 8-4 13-4 8 0 15 7 15 19z"/></svg>`,
+};
+const C = { bkash: '#e2136e', nagad: '#f26522', bank: '#1f4fa8', red: '#e0102a', green: '#0b7a35', yel: '#ffc414' };
+
+/* ======================== SCENES ======================== */
+const t0 = 0;
+// boundaries (middle of the pauses between script parts)
+const B = [0, 3.36, 9.05, 14.54, 19.76, 27.17, 36.52, 40.47, 47.25, 52.76, 62.10, 72.98, 83.10, DURATION];
+
+/* ---------- 01 HOOK: one QR, every bank & mobile banking ---------- */
+{
+  scene(B[0], 'cream', 1);
+  const h1 = add(`একটা <em>QR</em> কোড`, 60, 150, { cls: 'h', anchor: 'lt' });
+  A(h1, 'wipe', at('একটা'), .45); sfx(at('একটা'), 'swoosh', .5);
+  const green = add(`<div style="width:430px;height:470px;background:#0b7a35;border-radius:34px"></div>`, 560, 860);
+  A(green, 'pop', 0.05, .55); A(green, 'to', .15, .6, { from: { r: 0 }, to: { r: -7 } });
+  const q = add(bqr(400, '#111'), 540, 850);
+  A(q, 'pop', 0.12, .6); A(q, 'float', .8, 2.4, { a: 8, n: 1 }); sfx(0.12, 'pop', .8);
+  // banks on the left, mobile banking on the right
+  const tb = at('সব'), tm = at('মোবাইল');
+  const L = [[150, 610], [130, 860], [150, 1110]], R = [[930, 610], [950, 860], [930, 1110]];
+  L.forEach(([x, y], i) => { const n = add(`<div class="card" style="width:150px;height:150px;border-radius:30px;box-shadow:8px 8px 0 #111;display:flex;align-items:center;justify-content:center;background:${C.bank}">${IC.bank('#fff', 92)}</div>`, x, y); A(n, 'pop', tb + .12 + i * .1, .45); });
+  R.forEach(([x, y], i) => { const n = add(`<div class="card" style="width:150px;height:150px;border-radius:30px;box-shadow:8px 8px 0 #111;display:flex;align-items:center;justify-content:center;background:${[C.bkash, C.nagad, '#7b2cbf'][i]}">${IC.phone('#fff', 96)}</div>`, x, y); A(n, 'pop', tm + .05 + i * .1, .45); });
+  sfx(tb + .12, 'pop3', .6); sfx(tm + .05, 'pop3', .6);
+  const p1 = add(`<span class="pill k">সব ব্যাংক</span>`, 60, 330, { anchor: 'lt' }); A(p1, 'fromL', tb, .45);
+  const p2 = add(`<span class="pill r">মোবাইল ব্যাংকিং</span>`, 450, 330, { anchor: 'lt' }); A(p2, 'fromR', tm, .45);
+}
+
+/* ---------- 02 But... bKash & other institutions ---------- */
+{
+  scene(B[1], 'black', 2);
+  const k = at('কিন্তু');
+  const p = add(`<span class="pill y">কিন্তু…</span>`, 60, 150, { anchor: 'lt' }); A(p, 'pop', k - .05, .4);
+  const h = add(`এই <em>ব্যবস্থায়</em>`, 60, 270, { cls: 'h', anchor: 'lt' }); A(h, 'wipe', at('এই', 3.5), .5);
+  const q = add(bqr(280, '#ffc414'), 540, 620); A(q, 'pop', k + .1, .5); sfx(k + .1, 'pop', .6);
+  const tb = at('বিকাশসহ'), tv = at('বিভিন্ন'), tp = at('প্রতিষ্ঠানের');
+  const t1 = add(tile('বিকাশ', C.bkash), 220, 1110); A(t1, 'fromL', tb, .5); sfx(tb, 'pop', .9);
+  const big = add(`বিকাশ<span style="color:#fff">সহ</span>`, 540, 1000, { cls: 'big', css: `color:${C.bkash};font-size:150px;` });
+  const t2 = add(tile('নগদ', C.nagad), 540, 1110); A(t2, 'pop', tv, .45);
+  const t3 = add(tile(IC.bank('#fff', 110), C.bank, 'ব্যাংক'), 860, 1110); A(t3, 'pop', tv + .25, .45);
+  sfx(tv, 'pop', .7); sfx(tv + .25, 'pop', .7);
+  A(big, 'pop', tb + .02, .4); A(big, 'out', tv - .1, .25);
+  const lab = add(`<span class="pill w">বিভিন্ন প্রতিষ্ঠান</span>`, 540, 925); A(lab, 'up', tp, .4);
+  [[120, 520], [940, 560], [870, 860]].forEach(([x, y], i) => { const n = add(`<div class="big" style="font-size:130px;color:#ff2a3d">?</div>`, x, y); A(n, 'pop', tp + .3 + i * .15, .4); A(n, 'wobble', tp + .5 + i * .15, 1.2); });
+}
+
+/* ---------- 03 Questions! Where is the problem? ---------- */
+{
+  scene(B[2], 'black', 3);
+  const tr = at('ভূমিকা'), tq = at('প্রশ্ন'), ta = at('আসলে', 12), ts = at('সমস্যা'), tk = at('কোথায়');
+  const glow = add(`<div style="width:1100px;height:1100px;border-radius:50%;background:radial-gradient(circle,rgba(224,16,42,.45),transparent 65%)"></div>`, 540, 860);
+  A(glow, 'fade', tq - .1, .6);
+  const row = add(`<div style="display:flex;gap:40px">${tile('বিকাশ', C.bkash, '', 200)}${tile('নগদ', C.nagad, '', 200)}${tile(IC.bank('#fff', 90), C.bank, '', 200)}</div>`, 540, 540);
+  A(row, 'up', B[2] + .02, .45); A(row, 'out', ta - .15, .35);
+  const h = add(`<em>ভূমিকা</em> নিয়ে`, 60, 150, { cls: 'h', anchor: 'lt' }); A(h, 'wipe', tr, .45); A(h, 'outUp', ta - .15, .35);
+  const nn = add(`উঠছে নানা`, 540, 800, { cls: 'big', css: 'font-size:110px;color:#fff' }); A(nn, 'up', at('উঠছে'), .4); A(nn, 'out', ta - .15, .3);
+  const pq = add(`প্রশ্ন!`, 540, 1000, { cls: 'big', css: 'color:#ff2a3d;font-size:250px;text-shadow:0 0 40px rgba(255,42,61,.6)' });
+  A(pq, 'stamp', tq, .35, { r: -4 }); A(pq, 'shake', tq + .3, .45); A(pq, 'out', ta - .15, .35);
+  sfx(tq, 'boom', 1);
+  [[150, 740, 120], [930, 700, 150], [170, 1180, 110], [920, 1210, 130], [540, 640, 90]].forEach(([x, y, s], i) => { const n = add(`<div class="big" style="font-size:${s}px;color:#ffc414">?</div>`, x, y); A(n, 'pop', tq + .25 + i * .09, .35); A(n, 'wobble', tq + .5 + i * .09, 1); A(n, 'out', ta - .15, .3); });
+  sfx(tq + .25, 'pop3', .5);
+  const s1 = add(`আসলে`, 540, 470, { cls: 'big', css: 'font-size:120px;color:#fff' }); A(s1, 'up', ta, .4);
+  const s2 = add(`সমস্যা`, 540, 700, { cls: 'big', css: 'color:#ffc414;font-size:230px' }); A(s2, 'pop', ts, .45); sfx(ts, 'hit', .8);
+  const s3 = add(`কোথায়?`, 540, 950, { cls: 'big', css: 'color:#ff2a3d;font-size:210px' }); A(s3, 'pop', tk, .45); sfx(tk, 'hit', .8);
+  const mg = add(IC.mag(220, '#fff'), 830, 1130); A(mg, 'pop', tk + .2, .4); A(mg, 'to', tk + .5, 1.2, { from: { x: 0, r: 0 }, to: { x: -560, r: -20 }, ease: E.io });
+}
+
+/* ---------- 04 Bangladesh Bank launched Bangla QR ---------- */
+{
+  scene(B[3], 'green', 4);
+  const tb = at('বাংলাদেশ', 14), tu = at('উদ্যোগে'), tc = at('চালু'), tq = at('বাংলা', 17);
+  const pill = add(`<span class="pill y">পটভূমি</span>`, 60, 150, { anchor: 'lt' }); A(pill, 'pop', B[3] + .05, .4);
+  const h = add(`বাংলাদেশ ব্যাংকের`, 60, 270, { cls: 'h', anchor: 'lt', css: 'font-size:100px' }); A(h, 'wipe', tb, .55);
+  const h2 = add(`<em>উদ্যোগ</em>`, 60, 400, { cls: 'h', anchor: 'lt', css: 'font-size:100px' }); A(h2, 'wipe', tu, .4); sfx(tu, 'swoosh', .4);
+  const bank = add(`<div class="card" style="width:640px;height:520px;padding:40px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f6f1e1">
+      ${IC.bank('#0b5e2a', 280)}<div style="font:800 64px/1.2 Baloo;color:#111;margin-top:10px">বাংলাদেশ ব্যাংক</div></div>`, 440, 860);
+  A(bank, 'up', tb + .1, .55, { d: 160 }); sfx(tb + .1, 'pop', .6);
+  const q = add(bqr(330, '#111'), 790, 1050, { z: 5 }); A(q, 'stamp', tc, .35, { r: 6, from: 2.2 }); A(q, 'wobble', tc + .35, .8, { a: 4 });
+  sfx(tc, 'stamp', 1);
+  const burst = add(`<svg width="700" height="700" viewBox="-50 -50 100 100">${Array.from({ length: 12 }, (_, i) => `<path d="M0 -30 L0 -46" stroke="#ffc414" stroke-width="3.5" stroke-linecap="round" transform="rotate(${i * 30})"/>`).join('')}</svg>`, 790, 1050, { z: 4 });
+  A(burst, 'pop', tc + .05, .35); A(burst, 'out', tc + .45, .4);
+  const lp = add(`<span class="pill y" style="font-size:64px">চালু হয়েছে!</span>`, 330, 1220, { z: 6 }); A(lp, 'pop', tq - .05, .4); sfx(tq, 'ding', .7);
+}
+
+/* ---------- 05 Goal: one QR, pay from any provider ---------- */
+{
+  scene(B[4], 'cream', 5);
+  const tl = at('লক্ষ্য'), t1 = at('একটি'), tsn = at('স্ক্যান'), tbk = at('বিকাশ', 21), tn = at('নগদ', 22), tx = at('অংশগ্রহণকারী'), tpay = at('পেমেন্ট', 25);
+  const h = add(`<em>লক্ষ্য</em> ছিল`, 60, 150, { cls: 'h', anchor: 'lt' }); A(h, 'wipe', tl, .45); sfx(tl, 'swoosh', .45);
+  const h2 = add(`<span class="pill k">একটি QR কোড</span>`, 60, 330, { anchor: 'lt' }); A(h2, 'fromL', t1, .4);
+  // phone
+  const ph = add(`<div style="width:380px;height:640px;background:#111;border-radius:60px;padding:22px;box-shadow:16px 16px 0 #0b7a35;position:relative">
+     <div style="width:100%;height:100%;background:#fff;border-radius:42px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;position:relative">
+       <div style="font:700 34px Hind;color:#111;margin-bottom:10px">স্ক্যান করুন</div>${qrSVG(270, '#111', 5)}
+       <div class="scanl" style="position:absolute;left:20px;right:20px;height:8px;background:#e0102a;box-shadow:0 0 22px #e0102a;border-radius:4px;top:150px"></div>
+     </div></div>`, 540, 790);
+  A(ph, 'up', t1 + .05, .5, { d: 200 }); sfx(t1 + .05, 'pop', .6);
+  ph.scan = { t: tsn, dur: 1.2 };
+  const ok = add(`<div style="display:flex;flex-direction:column;align-items:center">${IC.check(200)}<span class="pill g" style="margin-top:14px;font-size:56px">পেমেন্ট</span></div>`, 540, 800, { z: 5 });
+  A(ok, 'pop', tpay, .45); sfx(tpay, 'kaching', .9);
+  const tiles = [[tile('বিকাশ', C.bkash, '', 190), 180, tbk], [tile('নগদ', C.nagad, '', 190), 900, tn], [tile(IC.bank('#fff', 78), C.bank, 'যেকোনো ব্যাংক', 190), 180, tx]];
+  const ys = [560, 560, 1050];
+  tiles.forEach(([html, x, t], i) => { const n = add(html, x, ys[i]); A(n, 'pop', t, .45); sfx(t, 'pop', .7); A(n, 'float', t + .5, 4, { a: 6 }); });
+  const t4 = add(tile(IC.phone('#fff', 80), '#7b2cbf', 'অন্যান্য', 190), 900, 1050); A(t4, 'pop', tx + .3, .45);
+  const sc = add(`<span class="pill r">স্ক্যান</span>`, 540, 1215, { z: 6 }); A(sc, 'pop', tsn, .35); sfx(tsn, 'beep', .7); A(sc, 'out', tpay - .2, .3);
+}
+
+/* ---------- 06 Directive: from 1 July 2026 ---------- */
+{
+  scene(B[5], 'yellow', 6);
+  const te = at('এই', 27), ty = at('২০২৬'), t1 = at('১', 29), tbz = at('ব্যবসাপ্রতিষ্ঠানে'), town = at('নিজস্ব'), tpar = at('পরিবর্তে'), tbq = at('বাংলা', 33.9), tnd = at('নির্দেশনা', 34);
+  const p = add(`<span class="pill k">বাস্তবায়ন</span>`, 60, 150, { anchor: 'lt' }); A(p, 'pop', te, .4);
+  const h = add(`১ জুলাই <em>২০২৬</em>`, 60, 270, { cls: 'h', anchor: 'lt' }); A(h, 'wipe', ty, .5);
+  const cal = add(`<div class="card" style="width:430px;overflow:hidden;padding:0;border-radius:40px">
+     <div style="background:#e0102a;color:#fff;font:800 64px/1.5 Baloo;text-align:center;border-bottom:8px solid #111">জুলাই ২০২৬</div>
+     <div class="cnum" style="font:800 300px/1.15 Baloo;color:#111;text-align:center;height:340px">১</div></div>`, 540, 820);
+  A(cal, 'pop', ty, .5); sfx(ty, 'pop', .7);
+  A(cal, 'stamp', t1, .01, { from: 1 }); A(cal, 'pulse', t1, .35, { a: .12 }); sfx(t1, 'stamp', .9);
+  A(cal, 'to', tbz - .1, .45, { from: { x: 0, y: 0, s: 1 }, to: { x: 330, y: -300, s: .42 } });
+  // shop
+  const shop = add(`<div style="width:820px;position:relative">
+     <div style="height:110px;border:8px solid #111;border-radius:26px 26px 0 0;background:repeating-linear-gradient(90deg,#e0102a 0 82px,#fff 82px 164px)"></div>
+     <div style="height:470px;background:#fff8e6;border:8px solid #111;border-top:none;border-radius:0 0 26px 26px;box-shadow:16px 16px 0 #111"></div>
+     <div style="position:absolute;left:50%;top:-58px;transform:translateX(-50%);background:#111;color:#ffc414;font:800 46px/1.4 Baloo;padding:4px 30px;border-radius:16px">ব্যবসাপ্রতিষ্ঠান</div></div>`, 540, 930);
+  A(shop, 'up', tbz, .5, { d: 200 }); sfx(tbz, 'swoosh', .6);
+  const own = add(`<div class="card" style="width:300px;padding:18px;border-radius:24px;box-shadow:8px 8px 0 #111;text-align:center"><div style="font:800 46px/1.2 Baloo">নিজস্ব QR</div>${qrSVG(250, '#444', 3, false)}</div>`, 540, 1010, { z: 3 });
+  A(own, 'pop', town, .4); sfx(town, 'pop', .7);
+  const x = add(IC.cross(230), 540, 1010, { z: 4 }); A(x, 'stamp', tpar, .3, { from: 2 }); sfx(tpar, 'buzz', .7);
+  A(own, 'out', tbq - .15, .3); A(x, 'out', tbq - .15, .3);
+  const nq = add(bqr(310, '#0b7a35'), 540, 1010, { z: 5 }); A(nq, 'popel', tbq, .7); sfx(tbq, 'ding', .8);
+  const nd = add(`<span class="pill k" style="font-size:66px">নির্দেশনা জারি</span>`, 540, 1250, { z: 6 }); A(nd, 'stamp', tnd, .3, { r: -4, from: 2 }); sfx(tnd, 'stamp', .8);
+}
+
+/* ---------- 07 But... challenges on the road ---------- */
+{
+  scene(B[6], 'black', 7);
+  const tk = at('কিন্তু', 36), tb = at('বাস্তবায়নের', 37), tbs = at('বেশ'), tc = at('চ্যালেঞ্জ', 39);
+  const p = add(`<span class="pill y">কিন্তু…</span>`, 60, 150, { anchor: 'lt' }); A(p, 'pop', tk - .05, .35);
+  const h = add(`বাস্তবায়নের <em>পথে</em>`, 60, 270, { cls: 'h', anchor: 'lt' }); A(h, 'wipe', tb, .5);
+  const road = add(`<svg width="1080" height="900" viewBox="0 0 1080 900"><path d="M380 900 L500 120 L580 120 L700 900Z" fill="#2a2a2e"/><path d="M540 880 L540 140" stroke="#ffc414" stroke-width="12" stroke-dasharray="60 50" pathLength="1" class="dp" fill="none"/></svg>`, 540, 900);
+  road.paths = road.el.querySelectorAll('.dp');
+  road.paths.forEach(p => { p.style.strokeDasharray = '1'; });
+  A(road, 'up', tb, .5); A(road, 'draw', tb + .1, 1);
+  [[230, 860, 170], [850, 900, 150], [690, 640, 110]].forEach(([x, y, s], i) => { const n = add(IC.warn(s), x, y); A(n, 'pop', tbs + i * .16, .4); sfx(tbs + i * .16, 'pop', .55); });
+  const ch = add(`চ্যালেঞ্জ`, 540, 1180, { cls: 'big', css: 'color:#ff2a3d;font-size:230px;text-shadow:0 0 50px rgba(255,42,61,.7)', z: 5 });
+  A(ch, 'stamp', tc, .3, { r: -3 }); A(ch, 'shake', tc + .28, .5); sfx(tc, 'boom', 1);
+}
+
+/* ---------- 08 Challenge 01: MDR / merchant charge ---------- */
+{
+  scene(B[7], 'cream', 8);
+  const tp = at('প্রথমত'), tch = at('চার্জ', 42), tm = at('MDR'), ta = at('অসন্তুষ্টি'), tbz = at('ব্যবসায়ীদের');
+  const h = add(`<em>চ্যালেঞ্জ</em>`, 60, 150, { cls: 'h', anchor: 'lt' }); A(h, 'wipe', B[7] + .05, .4);
+  const c1 = add(`<div class="card row"><div class="num">০১</div><div class="tx">মার্চেন্ট চার্জ (MDR)<small>প্রথম চ্যালেঞ্জ</small></div>${IC.store(110)}</div>`, 540, 450);
+  A(c1, 'fromL', tp, .5); sfx(tp, 'swoosh', .6);
+  const coin = add(`<div style="width:330px;height:330px;border-radius:50%;background:#ffc414;border:10px solid #111;box-shadow:12px 12px 0 #111;display:flex;align-items:center;justify-content:center;font:800 200px/1 Baloo;color:#111">%</div>`, 300, 860);
+  A(coin, 'pop', tch, .45); A(coin, 'spin', tch, .6, { a: 360 }); sfx(tch, 'coin', .8);
+  const lb = add(`<span class="pill r" style="font-size:60px">চার্জ</span>`, 300, 1100); A(lb, 'up', tch + .1, .35);
+  const mdr = add(`MDR`, 760, 860, { cls: 'big', css: 'font-size:200px;color:#111' }); A(mdr, 'stamp', tm, .3, { r: -5 }); sfx(tm, 'stamp', .9);
+  const ul = add(`<div style="width:360px;height:22px;background:#e0102a;border-radius:11px"></div>`, 760, 960); A(ul, 'wipe', tm + .2, .3);
+  [coin, lb, mdr, ul].forEach(n => A(n, 'out', ta - .2, .3));
+  const face = add(IC.angry(280), 270, 900); A(face, 'pop', ta, .45); A(face, 'shake', ta + .4, .6, { a: 12 }); sfx(ta, 'buzz', .8);
+  const as = add(`অসন্তুষ্টি`, 700, 860, { cls: 'big', css: 'font-size:130px;color:#e0102a' }); A(as, 'pop', ta + .05, .45);
+  const bz = add(`<span class="pill k">ব্যবসায়ীদের মধ্যে</span>`, 700, 1010); A(bz, 'up', tbz, .4); sfx(tbz, 'pop', .4);
+}
+
+/* ---------- 09 Challenge 02: transparency & suspicious payments ---------- */
+{
+  scene(B[8], 'cream', 9);
+  const td = at('দ্বিতীয়ত'), tl = at('লেনদেনের', 48), tsw = at('স্বচ্ছতা'), tsus = at('সন্দেহজনক'), tq = at('প্রশ্ন', 51);
+  const h = add(`<em>চ্যালেঞ্জ</em>`, 60, 150, { cls: 'h', anchor: 'lt' });
+  const c1 = add(`<div class="card row" style="opacity:.55"><div class="num">০১</div><div class="tx">মার্চেন্ট চার্জ (MDR)</div></div>`, 540, 400);
+  A(c1, 'to', B[8], .4, { from: { s: 1 }, to: { s: .92 } });
+  const c2 = add(`<div class="card row"><div class="num">০২</div><div class="tx">স্বচ্ছতা ও সন্দেহজনক পেমেন্ট</div>${IC.warn(110)}</div>`, 540, 610);
+  A(c2, 'fromL', td, .5); sfx(td, 'swoosh', .6);
+  const rows = ['লেনদেন #১', 'লেনদেন #২', 'লেনদেন #৩'];
+  const list = add(`<div class="card" style="width:720px;padding:26px 34px;box-shadow:14px 14px 0 #111">${rows.map((r, i) => `<div class="tr${i}" style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;margin:8px 0;border-radius:18px;background:#f2f2f2;font:700 46px Hind;color:#111"><span>${r}</span><span class="st" style="font:800 46px Baloo;color:#14a44d">✓</span></div>`).join('')}</div>`, 470, 1010);
+  A(list, 'up', tl, .45); sfx(tl, 'pop', .6);
+  const mg = add(IC.mag(230, '#111'), 860, 900, { z: 4 }); A(mg, 'pop', tsw, .35); A(mg, 'to', tsw + .1, 1.4, { from: { x: 0, y: 0 }, to: { x: -60, y: 140 } }); sfx(tsw, 'swoosh', .4);
+  list.sus = tsus; // turn row 2 red
+  const bd = add(`<div style="display:flex;align-items:center;gap:10px">${IC.warn(120)}<span class="pill r" style="font-size:54px">সন্দেহজনক</span></div>`, 640, 1210, { z: 5 });
+  A(bd, 'stamp', tsus, .3, { r: -5, from: 2 }); sfx(tsus, 'alert', .8);
+  const q = add(`?`, 900, 1060, { cls: 'big', css: 'font-size:200px;color:#e0102a', z: 6 }); A(q, 'pop', tq, .4); A(q, 'wobble', tq + .3, 1); sfx(tq, 'hit', .6);
+}
+
+/* ---------- 10 bKash expanding Bangla QR ---------- */
+{
+  scene(B[9], 'yellow', 10);
+  const to = at('অন্যদিকে'), tb = at('বিকাশ', 53), tj = at('জানিয়েছে'), tq = at('বাংলা', 54.7), ts = at('সম্প্রসারণ'), ti = at('ইতোমধ্যে'), tbp = at('বিপুলসংখ্যক'), tm = at('মার্চেন্ট', 58), tsth = at('স্থাপনও');
+  const p = add(`<span class="pill k">অন্যদিকে</span>`, 60, 150, { anchor: 'lt' }); A(p, 'pop', to, .4); A(p, 'outUp', ti - .2, .3);
+  const g1 = add(tile('বিকাশ', C.bkash, '', 300), 260, 640); A(g1, 'fromL', tb, .5); sfx(tb, 'pop', .8);
+  const plus = add(`<div style="width:120px;height:120px;border-radius:50%;background:#111;color:#ffc414;font:800 100px/120px Baloo;text-align:center">+</div>`, 540, 640, { z: 3 });
+  A(plus, 'pop', tq - .1, .35);
+  const g2 = add(bqr(300, '#111'), 820, 640); A(g2, 'fromR', tq, .5); sfx(tq, 'pop', .8);
+  const bub = add(`<div style="background:#fff;border:6px solid #111;border-radius:30px;padding:12px 30px 6px;font:800 50px/1.3 Baloo;color:#111;position:relative">জানিয়েছে<div style="position:absolute;left:40px;bottom:-30px;width:40px;height:40px;background:#fff;border-right:6px solid #111;border-bottom:6px solid #111;transform:rotate(45deg)"></div></div>`, 280, 400);
+  A(bub, 'pop', tj, .4); sfx(tj, 'pop', .5);
+  const big = add(`সম্প্রসারণ`, 540, 1060, { cls: 'big', css: 'font-size:160px;color:#111' }); A(big, 'stamp', ts, .3, { from: 2.2 }); sfx(ts, 'hit', .8);
+  const arr = [[-1, -1], [1, -1], [-1, 1], [1, 1]];
+  arr.forEach(([dx, dy], i) => { const n = add(`<div style="font:800 110px Baloo;color:#d10f24;transform:rotate(${Math.atan2(dy, dx) * 180 / Math.PI}deg)">➜</div>`, 540 + dx * 380, 1060 + dy * 90); A(n, 'to', ts + .15, .5, { from: { x: -dx * 120, o: 0 }, to: { x: 0, o: 1 }, ease: E.out }); });
+  [g1, plus, g2, bub, big].forEach(n => A(n, 'out', ti - .2, .3));
+  document.querySelectorAll; // noop
+  // merchant grid
+  const h = add(`<em>বিপুলসংখ্যক</em>`, 60, 150, { cls: 'h', anchor: 'lt' }); A(h, 'wipe', tbp, .45); sfx(tbp, 'swoosh', .5);
+  const h2 = add(`মার্চেন্ট পয়েন্টে`, 60, 290, { cls: 'h', anchor: 'lt', css: 'font-size:96px' }); A(h2, 'wipe', tm, .4);
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 5; c++) {
+    const i = r * 5 + c, tt = tm + .1 + i * .07;
+    const n = add(`<div style="position:relative">${IC.store(150, ['#e0102a', '#0b7a35', '#1f4fa8', '#e2136e'][(r + c) % 4])}<div style="position:absolute;right:-8px;top:-6px;background:#fff;border:4px solid #111;border-radius:10px;padding:3px">${qrSVG(46, '#0b7a35', i + 2, false)}</div></div>`, 150 + c * 195, 560 + r * 195);
+    A(n, 'pop', tt, .35); if (i % 3 === 0) sfx(tt, 'tick', .45);
+  }
+  const st = add(`<div style="display:flex;align-items:center;gap:16px">${IC.check(120)}<span class="pill k" style="font-size:70px">বাংলা QR স্থাপন</span></div>`, 540, 1230, { z: 6 });
+  A(st, 'stamp', tsth, .3, { r: -3, from: 2 }); sfx(tsth, 'ding', .9);
+}
+
+/* ---------- 11 Regulator: new directives ---------- */
+{
+  scene(B[10], 'green', 11);
+  const te = at('এসব'), tb = at('বাংলাদেশ', 63), tbr = at('বিরোধ'), tbt = at('ব্যর্থ'), tm = at('মার্চেন্টদের'), tn = at('নতুন', 70);
+  const p = add(`<span class="pill y">নিয়ন্ত্রক সংস্থা</span>`, 60, 150, { anchor: 'lt' }); A(p, 'pop', te - .1, .4);
+  const h = add(`বাংলাদেশ <em>ব্যাংক</em>`, 60, 260, { cls: 'h', anchor: 'lt' }); A(h, 'wipe', tb, .5); sfx(tb, 'swoosh', .5);
+  const bk = add(`<div style="background:#fff;border-radius:50%;width:150px;height:150px;border:6px solid #111;display:flex;align-items:center;justify-content:center">${IC.bank('#0b5e2a', 96)}</div>`, 930, 330);
+  A(bk, 'pop', tb + .2, .4);
+  const items = [
+    ['বিরোধ নিষ্পত্তি', 'লেনদেন সংক্রান্ত', IC.scale(100), tbr],
+    ['টাকা ফেরত', 'ব্যর্থ লেনদেনে', IC.refund(100), tbt],
+    ['দ্রুত নিষ্পত্তি', 'মার্চেন্টদের অর্থ', IC.bolt(100), tm],
+  ];
+  items.forEach(([a, b, ic, t], i) => {
+    const n = add(`<div class="card row" style="padding:18px 26px;gap:22px"><div style="width:120px;height:120px;border-radius:24px;background:#ffefb0;display:flex;align-items:center;justify-content:center">${ic}</div><div class="tx">${a}<small>${b}</small></div><div class="ck">${IC.check(100)}</div></div>`, 540, 590 + i * 220);
+    A(n, 'fromR', t, .5); sfx(t, 'swoosh', .55);
+    const ck = n.el.querySelector('.ck'); n.ck = { el: ck, t: t + .55 }; sfx(t + .55, 'ding', .55);
+  });
+  const st = add(`<span class="pill y" style="font-size:78px;border-width:6px">নতুন নির্দেশনা</span>`, 560, 1250, { z: 7 });
+  A(st, 'stamp', tn, .3, { r: -6, from: 2.4 }); sfx(tn, 'stamp', 1);
+}
+
+/* ---------- 12 Now the question: easy or collapse? ---------- */
+{
+  scene(B[11], 'black', 12);
+  const te = at('এখন'), tq = at('বাংলা', 74), tsh = at('সত্যিই'), tsd = at('সাধারণ'), tsj = at('সহজ'), tn = at('নাকি'), tc = at('চার্জ', 79), tj = at('জটিলতায়'), tmk = at('মুখ'), tu = at('উদ্যোগ', 81);
+  const p = add(`<span class="pill y" style="font-size:64px">এখন প্রশ্ন</span>`, 60, 150, { anchor: 'lt' }); A(p, 'pop', te, .4); sfx(te, 'hit', .6);
+  const q = add(bqr(300, '#ffc414'), 540, 560); A(q, 'pop', tq, .5); sfx(tq, 'pop', .6);
+  const sh = add(`সত্যিই?`, 870, 360, { cls: 'big', css: 'font-size:100px;color:#ffc414' }); A(sh, 'pop', tsh, .4);
+  const L = add(`<div class="card" style="width:450px;height:400px;background:#e9f9ee;box-shadow:14px 14px 0 #14a44d;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+     <div style="display:flex;align-items:center;gap:10px">${IC.people(110, '#111')}${IC.arrowUp(100)}</div>
+     <div style="font:800 52px/1.2 Baloo;color:#111;text-align:center">মানুষের লেনদেন</div><span class="pill g" style="font-size:58px">সহজ হবে?</span></div>`, 285, 1080);
+  A(L, 'fromL', tsd, .5); sfx(tsd, 'swoosh', .5); A(L, 'pulse', tsj, .4, { a: .06 }); sfx(tsj, 'ding', .6);
+  const R = add(`<div class="card" style="width:450px;height:400px;background:#fdeaea;box-shadow:14px 14px 0 #e0102a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+     <div style="display:flex;gap:10px"><span class="pill k" style="font-size:40px;padding:6px 22px 0">চার্জ</span><span class="pill k" style="font-size:40px;padding:6px 22px 0">জটিলতা</span></div>
+     ${IC.arrowDn(110)}<span class="pill r" style="font-size:52px">মুখ থুবড়ে পড়বে?</span></div>`, 795, 1080);
+  A(R, 'fromR', tn, .5); sfx(tn, 'swoosh', .5);
+  const vs = add(`<div style="width:130px;height:130px;border-radius:50%;background:#ffc414;border:7px solid #111;font:800 64px/118px Baloo;color:#111;text-align:center">VS</div>`, 540, 1080, { z: 5 });
+  A(vs, 'stamp', tn + .2, .3); sfx(tn + .2, 'hit', .7);
+  A(R, 'shake', tj, .4, { a: 10 }); sfx(tj, 'buzz', .5);
+  A(q, 'to', tmk, .7, { from: { r: 0, y: 0 }, to: { r: 28, y: 90 }, ease: E.el }); sfx(tmk, 'fall', .9);
+  const dq = add(`?`, 540, 820, { cls: 'big', css: 'font-size:150px;color:#ff2a3d' }); A(dq, 'pop', tu, .4); A(dq, 'wobble', tu + .3, 1);
+}
+
+/* ---------- 13 CTA ---------- */
+{
+  scene(B[12], 'black', 13);
+  const ta = at('আপনার', 83), tc = at('কমেন্টে'), tj = at('জানান');
+  const ch = add(IC.chat(300), 540, 620); A(ch, 'popel', ta, .7); A(ch, 'float', ta + .7, 3, { a: 10, n: 2 }); sfx(ta, 'pop', .9);
+  const h1 = add(`আপনার মতামত`, 540, 930, { cls: 'big', css: 'font-size:120px;color:#fff' }); A(h1, 'up', ta + .1, .45);
+  const h2 = add(`কমেন্টে জানান`, 540, 1100, { cls: 'big', css: 'font-size:120px;color:#ffc414' }); A(h2, 'up', tc, .45); sfx(tj, 'ding', .8);
+  const row = add(`<div style="display:flex;gap:40px">${['👍', '💬', '↗'].map(e => `<div style="width:110px;height:110px;border-radius:50%;background:#fff;border:5px solid #111;font:800 56px/100px sans-serif;text-align:center">${e}</div>`).join('')}</div>`, 540, 1260);
+  A(row, 'pop', tj + .3, .45);
+}
+
+/* ======================== CAPTIONS ======================== */
+const cap = document.createElement('div'); cap.id = 'cap'; stage.appendChild(cap);
+const prog = document.createElement('div'); prog.id = 'prog'; prog.innerHTML = '<i></i>'; stage.appendChild(prog);
+const KEY = ['QR', 'বাংলা', 'বিকাশ', 'নগদ', 'প্রশ্ন', 'সমস্যা', 'কোথায়', 'বাংলাদেশ', 'লক্ষ্য', 'পেমেন্ট', 'জুলাই', '২০২৬', '১', 'নির্দেশনা', 'চ্যালেঞ্জ', 'MDR', 'চার্জ', 'অসন্তুষ্টি', 'স্বচ্ছতা', 'সন্দেহজনক', 'সম্প্রসারণ', 'বিপুলসংখ্যক', 'নিষ্পত্তি', 'ফেরত', 'দ্রুত', 'সহজ', 'জটিলতায়', 'থুবড়ে', 'মতামত', 'কমেন্টে', 'ব্যর্থ', 'বিরোধ', 'স্ক্যান', 'নতুন'];
+const isKey = w => KEY.some(k => clean(w) === k || clean(w).startsWith(k));
+const CH = []; { let cur = [];
+  WL.forEach((w, i) => { cur.push(i); const end = /[।!?]$/.test(w.w), com = /,$/.test(w.w); const len = cur.map(j => WL[j].w).join(' ').length;
+    if (end || (com && cur.length >= 3) || cur.length >= 7 || len > 40) { CH.push(cur); cur = []; } });
+  if (cur.length) CH.push(cur); }
+CH.forEach(c => { c.html = c.map(j => `<span data-i="${j}">${WL[j].w}</span>`).join(' '); });
+let capShown = -1;
+function renderCap(t) {
+  let ci = -1;
+  for (let i = 0; i < CH.length; i++) if (WL[CH[i][0]].s - .12 <= t) ci = i;
+  if (ci < 0) ci = 0;
+  if (ci !== capShown) { cap.innerHTML = `<div>${CH[ci].html}</div>`; capShown = ci; }
+  cap.querySelectorAll('span').forEach(sp => { const w = WL[+sp.dataset.i];
+    sp.className = t >= w.e ? (isKey(w.w) ? 'k' : 'p') : t >= w.s - .03 ? 'c' : ''; });
+  const lastEnd = WL[WL.length - 1].e;
+  cap.style.opacity = t > lastEnd + .6 ? Math.max(0, 1 - (t - lastEnd - .6) / .4) : 1;
+}
+
+/* ======================== SEEK ======================== */
+function seek(t) {
+  // scenes + wipe transitions
+  SCENES.forEach((s, i) => {
+    const next = SCENES[i + 1], end = next ? next.start + .36 : 1e9;
+    const vis = t >= s.start && t < end;
+    s.root.style.display = vis ? 'block' : 'none';
+    s.root.style.zIndex = i;
+    if (vis && s.start > 0) { const p = cl((t - s.start) / .34); s.root.style.clipPath = p < 1 ? `inset(0 0 0 ${(1 - E.io(p)) * 100}%)` : 'none'; }
+  });
+  for (const n of NODES) if (n.el.closest('.scene').style.display !== 'none') applyNode(n, t);
+  // special: scan line, row turning red, check marks
+  for (const n of NODES) {
+    if (n.scan) { const l = n.el.querySelector('.scanl'); const p = (t - n.scan.t) / n.scan.dur; l.style.opacity = p >= 0 && p <= 1.3 ? 1 : 0; l.style.top = (60 + Math.abs(Math.sin(cl(p) * Math.PI * 1.5)) * 470) + 'px'; }
+    if (n.sus) { const r = n.el.querySelector('.tr1'); const on = t >= n.sus; r.style.background = on ? '#ffd9dc' : '#f2f2f2'; r.style.color = on ? '#c00' : '#111'; const s = r.querySelector('.st'); s.textContent = on ? '?' : '✓'; s.style.color = on ? '#e0102a' : '#14a44d'; }
+    if (n.ck) { const p = cl((t - n.ck.t) / .3); n.ck.el.style.transform = `scale(${E.back(p)})`; n.ck.el.style.opacity = p > 0 ? 1 : 0; }
+  }
+  renderCap(t);
+  prog.firstChild.style.width = (cl(t / DURATION) * 100) + '%';
+}
+window.seek = seek; window.SFX = SFX; window.DURATION = DURATION;
+window.READY = document.fonts.ready.then(() => { seek(0); return true; });
+// preview mode: open index.html?play in a browser
+if (location.search.includes('play')) {
+  const au = new Audio('assets/voiceover.mp3'); document.body.onclick = () => { au.play(); const st = performance.now(); (function f() { seek(au.currentTime); requestAnimationFrame(f); })(); };
+}
+</script>
+</body>
+</html>
