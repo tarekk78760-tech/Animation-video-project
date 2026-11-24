@@ -16,7 +16,8 @@ from timeline import CHUNKS, DURATION, SCENES  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 A = lambda *p: os.path.join(ROOT, "assets", *p)  # noqa: E731
-W, H, FPS = 1080, 1920, 30
+WIDE = os.environ.get("VIDEO_FORMAT") == "wide"
+W, H, FPS = (1920, 1080, 30) if WIDE else (1080, 1920, 30)
 XFADE = 0.4
 
 # palette
@@ -292,19 +293,30 @@ class Photo:
 
     def bg(self):
         if self._bg is None:
-            small = self.view(108, 192).filter(ImageFilter.GaussianBlur(5))
+            small = self.view(W // 10, H // 10).filter(ImageFilter.GaussianBlur(5))
             big = small.resize((W, H), Image.BICUBIC)
             big = ImageEnhance.Brightness(big).enhance(0.32).convert("RGBA")
             self._bg = Image.alpha_composite(big, GRAD)
         return self._bg
 
 
-def make_grad():
-    g = Image.new("L", (1, H))
-    for y in range(H):
-        v = 0.55 * (1 - clamp(y / 520)) + 0.6 * clamp((y - 1300) / 620)
-        g.putpixel((0, y), int(255 * clamp(v)))
-    g = g.resize((W, H))
+def make_grad(side=None):
+    """Darkening overlay. Vertical: top + bottom bands. Wide: bottom band plus an
+    optional dark side ('left' / 'right') where the headline text sits."""
+    sw, sh = W // 8, H // 8
+    g = Image.new("L", (sw, sh))
+    for y in range(sh):
+        for x in range(sw):
+            fy, fx = y / sh, x / sw
+            if WIDE:
+                v = 0.75 * clamp((fy - 0.62) / 0.38)
+                if side:
+                    d = fx if side == "left" else 1 - fx
+                    v = max(v, 0.88 * (1 - clamp(d / 0.62)) ** 1.3)
+            else:
+                v = 0.55 * (1 - clamp(fy * H / 520)) + 0.6 * clamp((fy * H - 1300) / 620)
+            g.putpixel((x, y), int(255 * clamp(v)))
+    g = g.resize((W, H), Image.BICUBIC)
     im = Image.new("RGBA", (W, H), NAVY + (0,))
     im.putalpha(g)
     return im
@@ -368,19 +380,20 @@ def solid(col):
 SUB_Y = 1520
 
 
-def subtitles(frame, t, y=SUB_Y):
+def subtitles(frame, t, y=None, maxw=920, size=50):
+    y = SUB_Y if y is None else y
     for (s, e, txt, show) in CHUNKS:
         if not show or not (s - 0.1 <= t <= e + 0.35):
             continue
         a = clamp((t - s + 0.1) / 0.2) * (1 - clamp((t - e - 0.1) / 0.25))
-        lines = wrap(txt, 50, "SemiBold", 920)
-        lh = 70
+        lines = wrap(txt, size, "SemiBold", maxw)
+        lh = int(size * 1.4)
         boxh = lh * len(lines) + 40
-        boxw = max(text_w(l, 50, "SemiBold") for l in lines) + 70
+        boxw = max(text_w(l, size, "SemiBold") for l in lines) + 70
         box = rrect((boxw, boxh), 22, (8, 12, 22, 175))
         put(frame, box, W / 2, y, a)
         for i, l in enumerate(lines):
-            text(frame, l, W / 2, y - (len(lines) - 1) * lh / 2 + i * lh, 50, "SemiBold", WHITE, a)
+            text(frame, l, W / 2, y - (len(lines) - 1) * lh / 2 + i * lh, size, "SemiBold", WHITE, a)
 
 
 # ---------------------------------------------------------------- scenes
@@ -651,21 +664,26 @@ def frame_at(t):
     return f.convert("RGB")
 
 
+FRAME_FN = None  # set by main(); read by pool workers (fork)
+
+
 def render_index(n):
-    return frame_at(n / FPS).tobytes()
+    return FRAME_FN(n / FPS).tobytes()
 
 
-def main():
+def main(frame_fn=None, name="shromik_bachle_shilpo_bachbe_9x16.mp4"):
+    global FRAME_FN
+    FRAME_FN = frame_fn or frame_at
     if len(sys.argv) > 2 and sys.argv[1] == "--preview":
         out = os.path.join(ROOT, "output", "preview")
         os.makedirs(out, exist_ok=True)
         for ts in sys.argv[2].split(","):
-            frame_at(float(ts)).save(os.path.join(out, f"t{float(ts):05.2f}.png"))
+            FRAME_FN(float(ts)).save(os.path.join(out, f"{'w' if WIDE else 't'}{float(ts):05.2f}.png"))
         return
     music = os.path.join(ROOT, "output", "music.wav")
     if not os.path.exists(music):
         subprocess.check_call([sys.executable, os.path.join(ROOT, "src", "make_music.py"), music])
-    dst = os.path.join(ROOT, "output", "shromik_bachle_shilpo_bachbe_9x16.mp4")
+    dst = os.path.join(ROOT, "output", name)
     n = int(DURATION * FPS)
     cmd = ["ffmpeg", "-y", "-loglevel", "error",
            "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",

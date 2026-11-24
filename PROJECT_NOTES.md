@@ -3,12 +3,14 @@
 ## কী কোথায় আছে
 | জিনিস | ফাইল |
 |---|---|
-| ফাইনাল ভিডিও (৯:১৬, ১০৮০×১৯২০, ৬৪.৫ সে.) | `output/shromik_bachle_shilpo_bachbe_9x16.mp4` |
+| ফাইনাল ভিডিও — খাড়া ৯:১৬ (১০৮০×১৯২০, ৬৪.৫ সে.) | `output/shromik_bachle_shilpo_bachbe_9x16.mp4` |
+| ফাইনাল ভিডিও — আড়াআড়ি ১৬:৯ (১৯২০×১০৮০, ৬৪.৫ সে.) | `output/shromik_bachle_shilpo_bachbe_16x9.mp4` |
 | ভয়েসওভার (ElevenLabs) | `assets/audio/voiceover.mp3` |
 | ফন্ট (Hind Siliguri, OFL লাইসেন্স) | `assets/fonts/` |
 | ছবি (৬টি) | `assets/images/` |
 | স্ক্রিপ্ট + প্রতিটা লাইনের সময় | `src/timeline.py` |
-| ভিডিও তৈরির কোড (দৃশ্য, গ্রাফিক্স, সাবটাইটেল) | `src/render.py` |
+| খাড়া ভিডিও তৈরির কোড (দৃশ্য, গ্রাফিক্স, সাবটাইটেল) | `src/render.py` |
+| আড়াআড়ি ভিডিওর দৃশ্য (render.py-এর টুলস ব্যবহার করে) | `src/render_wide.py` |
 | ব্যাকগ্রাউন্ড মিউজিক তৈরির কোড | `src/make_music.py` |
 
 ## ছবিগুলো
@@ -20,7 +22,7 @@
 - `jute_worker.webp` — বয়স্ক পাটকল শ্রমিক (দৃশ্য ৮)
 
 ## সিদ্ধান্তগুলো
-- ফরম্যাট: ৯:১৬ খাড়া (Reels / Shorts / TikTok)
+- ফরম্যাট: ৯:১৬ খাড়া (Reels / Shorts / TikTok) এবং ১৬:৯ আড়াআড়ি (YouTube / Facebook ফিড)
 - বাংলা সাবটাইটেল: হ্যাঁ (যেখানে বড় লেখা স্ক্রিনে একই কথা বলে, সেখানে সাবটাইটেল বন্ধ)
 - মিউজিক: নিজে বানানো নরম আবহ সুর, কথা বললে আপনাআপনি কমে যায়
 - রং: নেভি ব্যাকগ্রাউন্ড, সোনালি হাইলাইট, লাল সতর্কতা; শেষ দৃশ্য পতাকার সবুজ-লাল
@@ -28,9 +30,10 @@
 ## আবার বানাতে / বদলাতে
 ```
 pip install pillow numpy      # Pillow-এ raqm থাকতে হবে (বাংলা যুক্তাক্ষরের জন্য)
-python3 src/render.py         # পুরো ভিডিও (~২ মিনিট)
+python3 src/render.py         # খাড়া ভিডিও (~২ মিনিট)
+python3 src/render_wide.py    # আড়াআড়ি ভিডিও (~২ মিনিট)
 python3 src/render.py --preview 3.5,16.8,61.5   # শুধু কিছু ফ্রেমের ছবি
 ```
 - লেখা বা সময় বদলাতে: `src/timeline.py`
-- দৃশ্যের লেখা/রং/গ্রাফিক্স বদলাতে: `src/render.py`-এর `scene1` … `scene9`
+- দৃশ্যের লেখা/রং/গ্রাফিক্স বদলাতে: `src/render.py` (খাড়া) বা `src/render_wide.py` (আড়াআড়ি)-এর `scene1` … `scene9`
 - নতুন ভয়েস দিলে: `assets/audio/voiceover.mp3` বদলে `timeline.py`-এর সময়গুলো মিলিয়ে নিতে হবে
