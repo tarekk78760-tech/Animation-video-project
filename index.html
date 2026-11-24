@@ -474,11 +474,11 @@ const B = [0, 3.36, 9.05, 14.54, 19.76, 27.17, 36.52, 40.47, 47.25, 52.76, 62.10
   const sh = add(`সত্যিই?`, 870, 360, { cls: 'big', css: 'font-size:100px;color:#ffc414' }); A(sh, 'pop', tsh, .4);
   const L = add(`<div class="card" style="width:450px;height:400px;background:#e9f9ee;box-shadow:14px 14px 0 #14a44d;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
      <div style="display:flex;align-items:center;gap:10px">${IC.people(110, '#111')}${IC.arrowUp(100)}</div>
-     <div style="font:800 52px/1.2 Baloo;color:#111;text-align:center">মানুষের লেনদেন</div><span class="pill g" style="font-size:58px">সহজ হবে?</span></div>`, 285, 1080);
+     <div style="font:800 52px/1.2 Baloo;color:#111;text-align:center">মানুষের লেনদেন</div><span class="pill g" style="font-size:50px">সহজ হবে?</span></div>`, 285, 1080);
   A(L, 'fromL', tsd, .5); sfx(tsd, 'swoosh', .5); A(L, 'pulse', tsj, .4, { a: .06 }); sfx(tsj, 'ding', .6);
-  const R = add(`<div class="card" style="width:450px;height:400px;background:#fdeaea;box-shadow:14px 14px 0 #e0102a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+  const R = add(`<div class="card" style="width:440px;height:400px;background:#fdeaea;box-shadow:14px 14px 0 #e0102a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
      <div style="display:flex;gap:10px"><span class="pill k" style="font-size:40px;padding:6px 22px 0">চার্জ</span><span class="pill k" style="font-size:40px;padding:6px 22px 0">জটিলতা</span></div>
-     ${IC.arrowDn(110)}<span class="pill r" style="font-size:52px">মুখ থুবড়ে পড়বে?</span></div>`, 795, 1080);
+     ${IC.arrowDn(110)}<span class="pill r" style="font-size:42px;padding:8px 22px 2px">মুখ থুবড়ে পড়বে?</span></div>`, 790, 1080);
   A(R, 'fromR', tn, .5); sfx(tn, 'swoosh', .5);
   const vs = add(`<div style="width:130px;height:130px;border-radius:50%;background:#ffc414;border:7px solid #111;font:800 64px/118px Baloo;color:#111;text-align:center">VS</div>`, 540, 1080, { z: 5 });
   A(vs, 'stamp', tn + .2, .3); sfx(tn + .2, 'hit', .7);
@@ -494,7 +494,7 @@ const B = [0, 3.36, 9.05, 14.54, 19.76, 27.17, 36.52, 40.47, 47.25, 52.76, 62.10
   const ch = add(IC.chat(300), 540, 620); A(ch, 'popel', ta, .7); A(ch, 'float', ta + .7, 3, { a: 10, n: 2 }); sfx(ta, 'pop', .9);
   const h1 = add(`আপনার মতামত`, 540, 930, { cls: 'big', css: 'font-size:120px;color:#fff' }); A(h1, 'up', ta + .1, .45);
   const h2 = add(`কমেন্টে জানান`, 540, 1100, { cls: 'big', css: 'font-size:120px;color:#ffc414' }); A(h2, 'up', tc, .45); sfx(tj, 'ding', .8);
-  const row = add(`<div style="display:flex;gap:40px">${['👍', '💬', '↗'].map(e => `<div style="width:110px;height:110px;border-radius:50%;background:#fff;border:5px solid #111;font:800 56px/100px sans-serif;text-align:center">${e}</div>`).join('')}</div>`, 540, 1260);
+  const row = add(`<div style="display:flex;gap:40px">${[`<svg width="60" height="60" viewBox="0 0 64 64"><path d="M8 28h10v28H8zM22 56V28l12-20c5 0 7 4 6 9l-3 9h15c4 0 7 4 6 8l-5 18c-1 3-3 4-6 4z" fill="#111"/></svg>`, `<svg width="60" height="60" viewBox="0 0 64 64"><path d="M8 8h48a4 4 0 0 1 4 4v30a4 4 0 0 1-4 4H26L14 58V46H8a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4z" fill="#14a44d"/></svg>`, `<svg width="60" height="60" viewBox="0 0 64 64"><path d="M36 8l24 22-24 22V39C20 39 10 44 4 56c2-18 12-30 32-32z" fill="#111"/></svg>`].map(e => `<div style="width:120px;height:120px;border-radius:50%;background:#fff;border:5px solid #111;display:flex;align-items:center;justify-content:center">${e}</div>`).join('')}</div>`, 540, 1260);
   A(row, 'pop', tj + .3, .45);
 }
 
