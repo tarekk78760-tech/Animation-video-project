@@ -9,7 +9,7 @@ async function page(b){const p=await b.newPage({viewport:{width:1080,height:1920
  await p.evaluate(()=>document.fonts.ready);await p.evaluate(()=>renderFrame(0));await p.waitForTimeout(300);return p;}
 (async()=>{const b=await chromium.launch();
  if(stillsArg>0){const p=await page(b);for(const t of process.argv[stillsArg+1].split(',').map(Number)){await p.evaluate(t=>renderFrame(t),t);await p.screenshot({path:`${out}/still_${t}.jpg`,type:'jpeg',quality:85});}await b.close();return;}
- const Wk=+(process.argv[3]||4), per=Math.ceil(N/Wk);const t0=Date.now();
+ const Wk=+(process.argv[4]||4), per=Math.ceil(N/Wk);const t0=Date.now();
  await Promise.all([...Array(Wk).keys()].map(async w=>{const p=await page(b);const a=w*per,z=Math.min(N,a+per);
   const ff=spawn('ffmpeg',['-v','error','-y','-f','image2pipe','-framerate',String(FPS),'-c:v','mjpeg','-i','-','-c:v','libx264','-preset','medium','-crf','18','-pix_fmt','yuv420p',`${out}/seg${w}.mp4`]);
   for(let f=a;f<z;f++){await p.evaluate(t=>renderFrame(t),f/FPS);const buf=await p.screenshot({type:'jpeg',quality:94});
