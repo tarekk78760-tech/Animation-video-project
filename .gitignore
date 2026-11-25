@@ -2,3 +2,5 @@ output/music.wav
 output/preview/
 __pycache__/
 tomato/preview/
+tomato/build/
+output/tomato_music.wav

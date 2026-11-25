@@ -1,5 +1,5 @@
 """Generates a soft, sombre ambient pad (no samples, pure synthesis) as WAV.
-usage: python3 src/make_music.py out.wav"""
+usage: python3 src/make_music.py out.wav [duration_seconds]"""
 import sys
 import wave
 
@@ -7,6 +7,9 @@ import numpy as np
 
 sys.path.insert(0, __import__("os").path.dirname(__file__))
 from timeline import DURATION  # noqa: E402
+
+if len(sys.argv) > 2:
+    DURATION = float(sys.argv[2])
 
 SR = 48000
 n = int(DURATION * SR)
