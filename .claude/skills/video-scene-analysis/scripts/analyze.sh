@@ -34,10 +34,13 @@ if ffprobe -v error -select_streams a -show_entries stream=index -of csv=p=0 "$V
   ffmpeg -nostdin -i "$V" -af silencedetect=n=-35dB:d=0.4 -f null - 2>&1 | grep -E "silence_(start|end)" | tee "$OUT/silences.txt"
   ffmpeg -nostdin -v error -y -i "$V" -ac 1 -ar 16000 "$OUT/audio.wav"
   python3 - "$OUT/audio.wav" "$WM" > "$OUT/transcript.txt" 2>"$OUT/transcript.err" <<'PY' || echo "transcription failed: see transcript.err"
-import sys
+import sys, wave, numpy as np
 from faster_whisper import WhisperModel
+# pass raw samples: avoids PyAV version incompatibility in faster_whisper.decode_audio
+w = wave.open(sys.argv[1])
+audio = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
 m = WhisperModel(sys.argv[2], device="cpu", compute_type="int8")
-segs, info = m.transcribe(sys.argv[1], word_timestamps=False)
+segs, info = m.transcribe(audio)
 print(f"# language={info.language} p={info.language_probability:.2f}")
 for s in segs:
     print(f"{s.start:6.1f}-{s.end:6.1f}: {s.text.strip()}")

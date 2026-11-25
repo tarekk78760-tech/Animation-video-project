@@ -18,7 +18,8 @@ It outputs: `info.txt` (duration, resolution, fps, scene ranges), `scenes.txt` (
 `grid_XX.jpg` (1 fps contact sheets, 6 frames each), `scenes/scene_NN_mid.jpg`, `silences.txt`, `transcript.txt`.
 
 - No cuts found? Lower threshold to 0.1; AI-generated clips are often fixed-length (e.g. every 8 s).
-- Transcription needs `pip install faster-whisper` (first run downloads the model; can take minutes — run in background and keep going). If it fails, say so and analyze visuals only; never invent narration.
+- Transcription needs `pip install faster-whisper` (first run downloads the model; can take minutes — run in background and keep going). The model download needs network access to `huggingface.co`, `us.aws.cdn.hf.co` and `cas-server.xethub.hf.co`; if a 403 from the proxy appears, request those hosts for the environment. If it still fails, say so and analyze visuals only; never invent narration.
+- Map each transcript line to the scene whose time range contains it.
 
 ## 2. Look at the frames
 Read **every** `grid_XX.jpg` with the Read tool (they show the motion within each scene). Open a `scene_NN_mid.jpg` at higher resolution when on-screen text or detail is unclear.
