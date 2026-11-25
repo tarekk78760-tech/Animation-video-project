@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'HS';src:url('fonts/HindSiliguri-Bold.ttf');font-weight:700}
+@font-face{font-family:'HS';src:url('fonts/HindSiliguri-SemiBold.ttf');font-weight:600}
+@font-face{font-family:'HS';src:url('fonts/HindSiliguri-Medium.ttf');font-weight:500}
+html,body{margin:0;background:#111}
+canvas{display:block;max-height:100vh}
+</style></head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script src="anim.js"></script>
+<script>
+// preview mode: open index.html?play to watch in a browser
+window.ready = Promise.all([
+  document.fonts.load('700 40px HS','বাংলা'),
+  document.fonts.load('600 40px HS','বাংলা'),
+  document.fonts.load('500 40px HS','বাংলা')]);
+if (location.search.includes('play')) ready.then(()=>{
+  const t0=performance.now();
+  (function loop(){render(((performance.now()-t0)/1000)%DUR);requestAnimationFrame(loop)})();
+});
+</script>
+</body></html>
