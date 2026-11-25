@@ -1,0 +1,303 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="art" style="position:absolute;width:0;height:0;overflow:hidden">
+<!-- Hand-drawn flat illustrations for the tomato documentary.
+     Inspired by the reference photos (farmer in a wilting tomato field, market vendor
+     with baskets, buyer with a blue bowl, tomato plant) but drawn from scratch. -->
+<defs>
+  <pattern id="checkPink" width="22" height="22" patternUnits="userSpaceOnUse">
+    <rect width="22" height="22" fill="#d8c7a6"/>
+    <rect width="22" height="5" fill="#b9a27a"/><rect width="5" height="22" fill="#b9a27a"/>
+    <rect x="11" width="2" height="22" fill="#8f7a56" opacity=".5"/>
+  </pattern>
+  <pattern id="checkTeal" width="24" height="24" patternUnits="userSpaceOnUse">
+    <rect width="24" height="24" fill="#2f8a8f"/>
+    <rect width="24" height="6" fill="#246c70"/><rect width="6" height="24" fill="#246c70"/>
+    <rect x="14" width="2" height="24" fill="#bfe6e3" opacity=".6"/>
+  </pattern>
+  <pattern id="weave" width="18" height="12" patternUnits="userSpaceOnUse">
+    <rect width="18" height="12" fill="#c9924f"/>
+    <path d="M0 6 Q4.5 0 9 6 T18 6" stroke="#9b6a32" stroke-width="2.5" fill="none"/>
+  </pattern>
+  <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#f7d9a8"/><stop offset="1" stop-color="#fbeed3"/>
+  </linearGradient>
+  <radialGradient id="tomG" cx=".38" cy=".35" r=".75">
+    <stop offset="0" stop-color="#ff6b4a"/><stop offset=".7" stop-color="#e2462c"/><stop offset="1" stop-color="#b8301c"/>
+  </radialGradient>
+
+  <!-- tomato -->
+  <symbol id="tomato" viewBox="0 0 100 100">
+    <ellipse cx="50" cy="57" rx="41" ry="36" fill="url(#tomG)" stroke="#1d1b20" stroke-width="4"/>
+    <path d="M27 44 Q33 33 46 34" stroke="#ffb29c" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M50 17 L55 29 L68 25 L60 35 L69 43 L54 38 L44 45 L45 35 L32 29 L46 29 Z" fill="#3f8f3a" stroke="#1d1b20" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="47" y="10" width="6" height="12" rx="3" fill="#3f8f3a" stroke="#1d1b20" stroke-width="3"/>
+  </symbol>
+  <symbol id="tomatoGreen" viewBox="0 0 100 100">
+    <ellipse cx="50" cy="57" rx="41" ry="36" fill="#9cc75b" stroke="#1d1b20" stroke-width="4"/>
+    <path d="M27 44 Q33 33 46 34" stroke="#d6efa8" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M50 17 L55 29 L68 25 L60 35 L69 43 L54 38 L44 45 L45 35 L32 29 L46 29 Z" fill="#3f8f3a" stroke="#1d1b20" stroke-width="3" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="tomatoSlice" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="44" fill="#e2462c" stroke="#1d1b20" stroke-width="4"/>
+    <circle cx="50" cy="50" r="35" fill="#f2694a"/>
+    <g fill="#ffd27a" stroke="#c97a2a" stroke-width="1.5">
+      <path d="M50 50 L50 20 Q66 26 64 44 Z"/><path d="M50 50 L76 58 Q70 76 54 74 Z"/><path d="M50 50 L36 76 Q22 66 26 50 Z"/><path d="M50 50 L26 40 Q32 22 46 22 Z" opacity=".9"/>
+    </g>
+    <circle cx="50" cy="50" r="7" fill="#f7a08a"/>
+  </symbol>
+
+  <!-- leaf -->
+  <symbol id="leaf" viewBox="0 0 60 40">
+    <path d="M2 20 Q20 0 58 20 Q20 40 2 20 Z" fill="#5fa645" stroke="#1d1b20" stroke-width="3"/>
+    <path d="M6 20 L50 20" stroke="#2c6b2c" stroke-width="2.5"/>
+  </symbol>
+
+  <!-- tomato plant (after the textbook-style plant) -->
+  <symbol id="plant" viewBox="0 0 300 420">
+    <path d="M150 410 L150 60" stroke="#1d1b20" stroke-width="14" stroke-linecap="round"/>
+    <path d="M150 410 L150 60" stroke="#4f9a3d" stroke-width="8" stroke-linecap="round"/>
+    <g stroke="#1d1b20" stroke-width="9" fill="none" stroke-linecap="round"><path d="M150 300 Q100 260 60 250"/><path d="M150 230 Q210 200 250 205"/><path d="M150 160 Q100 140 70 120"/><path d="M150 120 Q190 100 215 80"/></g>
+    <g stroke="#4f9a3d" stroke-width="5" fill="none" stroke-linecap="round"><path d="M150 300 Q100 260 60 250"/><path d="M150 230 Q210 200 250 205"/><path d="M150 160 Q100 140 70 120"/><path d="M150 120 Q190 100 215 80"/></g>
+    <use href="#leaf" x="20" y="225" width="60" height="40"/><use href="#leaf" x="90" y="255" width="50" height="34" transform="rotate(-20 115 272)"/>
+    <use href="#leaf" x="235" y="180" width="60" height="40" transform="rotate(-15 265 200)"/><use href="#leaf" x="170" y="190" width="50" height="34"/>
+    <use href="#leaf" x="30" y="95" width="60" height="40" transform="rotate(20 60 115)"/><use href="#leaf" x="200" y="55" width="60" height="40" transform="rotate(-30 230 75)"/>
+    <use href="#leaf" x="120" y="30" width="60" height="40" transform="rotate(-70 150 50)"/>
+    <use href="#tomato" x="45" y="255" width="58" height="58"/><use href="#tomato" x="85" y="270" width="48" height="48"/>
+    <use href="#tomato" x="205" y="210" width="62" height="62"/><use href="#tomatoGreen" x="170" y="225" width="44" height="44"/>
+    <g fill="#f4c430" stroke="#1d1b20" stroke-width="2.5"><path d="M210 90 l8 -14 l6 14 l14 -4 l-10 12 l10 10 l-14 -2 l-6 14 l-6 -14 l-14 4 l10 -12 l-10 -10 Z"/></g>
+  </symbol>
+
+  <!-- crate full of tomatoes -->
+  <symbol id="crate" viewBox="0 0 220 160">
+    <g>
+      <use href="#tomato" x="12" y="2" width="56" height="56"/><use href="#tomato" x="58" y="-6" width="60" height="60"/>
+      <use href="#tomato" x="106" y="0" width="58" height="58"/><use href="#tomato" x="150" y="4" width="56" height="56"/>
+      <use href="#tomato" x="35" y="20" width="52" height="52"/><use href="#tomato" x="125" y="22" width="52" height="52"/>
+    </g>
+    <rect x="6" y="52" width="208" height="100" rx="6" fill="#c98a4b" stroke="#1d1b20" stroke-width="5"/>
+    <path d="M6 85 H214 M6 118 H214" stroke="#1d1b20" stroke-width="4"/>
+    <path d="M40 52 V152 M180 52 V152" stroke="#8d5a2b" stroke-width="5"/>
+  </symbol>
+
+  <!-- woven basket heaped with tomatoes (after the vendor photo) -->
+  <symbol id="basket" viewBox="0 0 260 170">
+    <g>
+      <use href="#tomato" x="20" y="18" width="56" height="56"/><use href="#tomato" x="64" y="4" width="60" height="60"/>
+      <use href="#tomato" x="112" y="0" width="62" height="62"/><use href="#tomato" x="160" y="8" width="58" height="58"/>
+      <use href="#tomato" x="196" y="26" width="50" height="50"/><use href="#tomato" x="88" y="30" width="54" height="54"/><use href="#tomato" x="40" y="40" width="50" height="50"/>
+    </g>
+    <path d="M10 70 H250 L228 160 H32 Z" fill="url(#weave)" stroke="#1d1b20" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M6 66 H254" stroke="#1d1b20" stroke-width="10" stroke-linecap="round"/>
+    <path d="M6 66 H254" stroke="#e0b47a" stroke-width="5" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- farmer sitting in the field, hand on head (after photos 6 & 7) -->
+  <symbol id="farmerSad" viewBox="0 0 300 360">
+    <path d="M55 250 Q150 212 245 250 L262 328 Q150 350 38 328 Z" fill="url(#checkPink)" stroke="#1d1b20" stroke-width="5" stroke-linejoin="round"/>
+    <ellipse cx="72" cy="336" rx="30" ry="13" fill="#8e5536" stroke="#1d1b20" stroke-width="4"/>
+    <ellipse cx="228" cy="336" rx="30" ry="13" fill="#8e5536" stroke="#1d1b20" stroke-width="4"/>
+    <path d="M95 152 Q150 130 205 152 L216 262 Q150 280 84 262 Z" fill="#d46f7a" stroke="#1d1b20" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M150 150 L150 262" stroke="#b25560" stroke-width="3"/>
+    <circle cx="150" cy="185" r="3" fill="#1d1b20"/><circle cx="150" cy="210" r="3" fill="#1d1b20"/>
+    <!-- left arm resting on knee -->
+    <path d="M104 165 Q78 212 96 246 L134 252" stroke="#1d1b20" stroke-width="34" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M104 165 Q78 212 96 246 L134 252" stroke="#d46f7a" stroke-width="24" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="142" cy="252" r="15" fill="#8e5536" stroke="#1d1b20" stroke-width="4"/>
+    <!-- neck + head -->
+    <rect x="134" y="118" width="32" height="30" fill="#8e5536" stroke="#1d1b20" stroke-width="4"/>
+    <circle cx="108" cy="100" r="10" fill="#8e5536" stroke="#1d1b20" stroke-width="4"/>
+    <circle cx="192" cy="100" r="10" fill="#8e5536" stroke="#1d1b20" stroke-width="4"/>
+    <circle cx="150" cy="95" r="43" fill="#9a5f3d" stroke="#1d1b20" stroke-width="5"/>
+    <path d="M112 104 Q150 168 188 104 Q175 128 150 130 Q125 128 112 104 Z" fill="#cfcfc7" stroke="#1d1b20" stroke-width="3"/>
+    <path d="M132 110 Q150 102 168 110" stroke="#cfcfc7" stroke-width="7" stroke-linecap="round" fill="none"/>
+    <path d="M143 120 Q150 115 157 120" stroke="#1d1b20" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M128 93 q6 4 12 0 M160 93 q6 4 12 0" stroke="#1d1b20" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M125 84 L141 78 M159 78 L175 84" stroke="#1d1b20" stroke-width="4" stroke-linecap="round"/>
+    <!-- right arm up, hand on head -->
+    <path d="M198 165 Q240 148 222 100" stroke="#1d1b20" stroke-width="34" fill="none" stroke-linecap="round"/>
+    <path d="M198 165 Q240 148 222 100" stroke="#d46f7a" stroke-width="24" fill="none" stroke-linecap="round"/>
+    <path d="M222 102 L196 70" stroke="#1d1b20" stroke-width="24" stroke-linecap="round"/>
+    <path d="M222 102 L196 70" stroke="#8e5536" stroke-width="15" stroke-linecap="round"/>
+    <ellipse cx="180" cy="62" rx="24" ry="15" fill="#8e5536" stroke="#1d1b20" stroke-width="4" transform="rotate(-20 180 62)"/>
+    <path d="M166 60 l16 -6 M170 68 l16 -6" stroke="#1d1b20" stroke-width="2.5"/>
+  </symbol>
+
+  <!-- farmer standing (after the Dhaka field photo) -->
+  <symbol id="farmerStand" viewBox="0 0 220 430">
+    <path d="M58 228 H164 L176 405 H46 Z" fill="url(#checkTeal)" stroke="#1d1b20" stroke-width="5" stroke-linejoin="round"/>
+    <ellipse cx="80" cy="414" rx="26" ry="11" fill="#8e5536" stroke="#1d1b20" stroke-width="4"/>
+    <ellipse cx="142" cy="414" rx="26" ry="11" fill="#8e5536" stroke="#1d1b20" stroke-width="4"/>
+    <path d="M40 140 Q25 200 40 232" stroke="#1d1b20" stroke-width="26" stroke-linecap="round" fill="none"/>
+    <path d="M40 140 Q25 200 40 232" stroke="#8e5536" stroke-width="17" stroke-linecap="round" fill="none"/>
+    <path d="M180 140 Q195 200 180 232" stroke="#1d1b20" stroke-width="26" stroke-linecap="round" fill="none"/>
+    <path d="M180 140 Q195 200 180 232" stroke="#8e5536" stroke-width="17" stroke-linecap="round" fill="none"/>
+    <path d="M56 118 Q110 100 164 118 L186 165 L170 172 L168 240 H52 L50 172 L34 165 Z" fill="#f4f2ea" stroke="#1d1b20" stroke-width="5" stroke-linejoin="round"/>
+    <rect x="62" y="226" width="96" height="22" rx="6" fill="#3a3a40" stroke="#1d1b20" stroke-width="4"/>
+    <rect x="96" y="90" width="30" height="28" fill="#8e5536" stroke="#1d1b20" stroke-width="4"/>
+    <circle cx="111" cy="66" r="38" fill="#9a5f3d" stroke="#1d1b20" stroke-width="5"/>
+    <path d="M78 74 Q111 132 144 74 Q132 96 111 98 Q90 96 78 74 Z" fill="#ecece4" stroke="#1d1b20" stroke-width="3"/>
+    <path d="M96 80 Q111 73 126 80" stroke="#ecece4" stroke-width="7" stroke-linecap="round" fill="none"/>
+    <path d="M94 64 h10 M118 64 h10" stroke="#1d1b20" stroke-width="4" stroke-linecap="round"/>
+    <path d="M92 54 L104 52 M118 52 L130 54" stroke="#1d1b20" stroke-width="3.5" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- market vendor with white cap (after bdnews photo) -->
+  <symbol id="vendor" viewBox="0 0 260 300">
+    <path d="M40 300 Q40 180 130 168 Q220 180 220 300 Z" fill="#f4f2ea" stroke="#1d1b20" stroke-width="5"/>
+    <path d="M130 172 L130 230" stroke="#c9c6ba" stroke-width="4"/>
+    <rect x="115" y="140" width="30" height="34" fill="#8e5536" stroke="#1d1b20" stroke-width="4"/>
+    <circle cx="130" cy="110" r="44" fill="#9a5f3d" stroke="#1d1b20" stroke-width="5"/>
+    <path d="M88 118 Q130 190 172 118 Q160 145 130 148 Q100 145 88 118 Z" fill="#a8a69c" stroke="#1d1b20" stroke-width="3"/>
+    <path d="M110 124 Q130 116 150 124" stroke="#a8a69c" stroke-width="7" stroke-linecap="round" fill="none"/>
+    <path d="M86 96 Q88 56 130 54 Q172 56 174 96 Z" fill="#ffffff" stroke="#1d1b20" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M90 84 H170" stroke="#d9d6cb" stroke-width="3"/>
+    <path d="M110 106 q6 -5 12 0 M138 106 q6 -5 12 0" stroke="#1d1b20" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M120 134 Q130 140 140 134" stroke="#1d1b20" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- buyer with blue bowl (after the market photo) -->
+  <symbol id="buyer" viewBox="0 0 240 430">
+    <path d="M70 150 Q120 132 170 150 L196 400 H44 Z" fill="#2f8fd1" stroke="#1d1b20" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M78 155 Q130 220 186 160" stroke="#1f6fa8" stroke-width="16" fill="none" stroke-linecap="round"/>
+    <rect x="62" y="398" width="46" height="22" rx="8" fill="#2a2a30" stroke="#1d1b20" stroke-width="4"/>
+    <rect x="132" y="398" width="46" height="22" rx="8" fill="#2a2a30" stroke="#1d1b20" stroke-width="4"/>
+    <rect x="106" y="114" width="28" height="30" fill="#b07a55" stroke="#1d1b20" stroke-width="4"/>
+    <circle cx="160" cy="52" r="20" fill="#2a2024" stroke="#1d1b20" stroke-width="4"/>
+    <circle cx="120" cy="84" r="38" fill="#b07a55" stroke="#1d1b20" stroke-width="5"/>
+    <path d="M82 84 Q80 40 122 42 Q160 44 158 84 Q150 60 120 60 Q96 62 82 84 Z" fill="#2a2024" stroke="#1d1b20" stroke-width="4"/>
+    <path d="M104 88 q5 4 10 0 M128 88 q5 4 10 0" stroke="#1d1b20" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M112 104 Q120 100 128 104" stroke="#1d1b20" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="96" cy="98" r="3" fill="#e9a07a"/>
+    <path d="M78 175 Q60 230 100 250" stroke="#1d1b20" stroke-width="26" fill="none" stroke-linecap="round"/>
+    <path d="M78 175 Q60 230 100 250" stroke="#2f8fd1" stroke-width="17" fill="none" stroke-linecap="round"/>
+    <path d="M100 250 L140 244" stroke="#1d1b20" stroke-width="20" stroke-linecap="round"/>
+    <path d="M100 250 L140 244" stroke="#b07a55" stroke-width="12" stroke-linecap="round"/>
+    <path d="M98 228 Q150 300 214 228 Z" fill="#5fb7ee" stroke="#1d1b20" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M92 228 H220" stroke="#1d1b20" stroke-width="7" stroke-linecap="round"/>
+    <use href="#tomato" x="118" y="196" width="40" height="40"/><use href="#tomato" x="150" y="192" width="44" height="44"/>
+  </symbol>
+
+  <!-- truck -->
+  <symbol id="truck" viewBox="0 0 340 200">
+    <rect x="10" y="40" width="210" height="110" rx="8" fill="#f2b134" stroke="#1d1b20" stroke-width="5"/>
+    <path d="M10 75 H220 M10 110 H220" stroke="#c98a1a" stroke-width="4"/>
+    <use href="#tomato" x="20" y="8" width="44" height="44"/><use href="#tomato" x="60" y="2" width="48" height="48"/><use href="#tomato" x="104" y="6" width="46" height="46"/><use href="#tomato" x="146" y="4" width="48" height="48"/>
+    <path d="M222 70 H285 L325 115 V150 H222 Z" fill="#2f8a8f" stroke="#1d1b20" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M240 82 H280 L308 114 H240 Z" fill="#cfeef0" stroke="#1d1b20" stroke-width="4"/>
+    <rect x="316" y="130" width="12" height="12" fill="#ffe27a" stroke="#1d1b20" stroke-width="3"/>
+    <circle cx="70" cy="158" r="26" fill="#2a2a30" stroke="#1d1b20" stroke-width="5"/><circle cx="70" cy="158" r="10" fill="#bbb"/>
+    <circle cx="270" cy="158" r="26" fill="#2a2a30" stroke="#1d1b20" stroke-width="5"/><circle cx="270" cy="158" r="10" fill="#bbb"/>
+  </symbol>
+
+  <!-- arot / wholesale depot -->
+  <symbol id="depot" viewBox="0 0 320 240">
+    <path d="M20 90 L160 20 L300 90 Z" fill="#b8301c" stroke="#1d1b20" stroke-width="5" stroke-linejoin="round"/>
+    <rect x="35" y="90" width="250" height="140" fill="#efe3c8" stroke="#1d1b20" stroke-width="5"/>
+    <rect x="70" y="120" width="180" height="110" fill="#8a8f99" stroke="#1d1b20" stroke-width="5"/>
+    <path d="M70 140 H250 M70 160 H250 M70 180 H250 M70 200 H250" stroke="#6b707a" stroke-width="4"/>
+    <g fill="#d9c08a" stroke="#1d1b20" stroke-width="4"><ellipse cx="45" cy="214" rx="28" ry="20"/><ellipse cx="280" cy="214" rx="28" ry="20"/><ellipse cx="262" cy="196" rx="24" ry="17"/></g>
+    <rect x="115" y="96" width="90" height="20" rx="4" fill="#1d1b20"/>
+  </symbol>
+
+  <!-- retail stall with striped awning -->
+  <symbol id="stall" viewBox="0 0 320 280">
+    <rect x="30" y="70" width="12" height="200" fill="#8d5a2b" stroke="#1d1b20" stroke-width="4"/>
+    <rect x="278" y="70" width="12" height="200" fill="#8d5a2b" stroke="#1d1b20" stroke-width="4"/>
+    <path d="M10 20 H310 L300 80 H20 Z" fill="#fff" stroke="#1d1b20" stroke-width="5" stroke-linejoin="round"/>
+    <g fill="#e2462c"><path d="M40 20 H80 L76 80 H38 Z"/><path d="M120 20 H160 L160 80 H118 Z"/><path d="M200 20 H240 L244 80 H202 Z"/><path d="M280 20 H310 L300 80 H284 Z"/></g>
+    <path d="M10 20 H310 L300 80 H20 Z" fill="none" stroke="#1d1b20" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M20 80 q18 22 36 0 q18 22 36 0 q18 22 36 0 q18 22 36 0 q18 22 36 0 q18 22 36 0 q18 22 36 0 q18 22 36 0" fill="#e2462c" stroke="#1d1b20" stroke-width="4"/>
+    <use href="#basket" x="40" y="150" width="140" height="92"/><use href="#basket" x="150" y="150" width="140" height="92"/>
+    <rect x="20" y="236" width="280" height="40" rx="5" fill="#c98a4b" stroke="#1d1b20" stroke-width="5"/>
+  </symbol>
+
+  <!-- wholesaler with ledger -->
+  <symbol id="ledger" viewBox="0 0 120 140">
+    <rect x="12" y="10" width="96" height="122" rx="8" fill="#2f5d8a" stroke="#1d1b20" stroke-width="5"/>
+    <rect x="26" y="26" width="68" height="90" fill="#f5ecd9" stroke="#1d1b20" stroke-width="3"/>
+    <path d="M34 44 H86 M34 60 H86 M34 76 H76 M34 92 H82" stroke="#1d1b20" stroke-width="4" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="wallet" viewBox="0 0 200 160">
+    <rect x="22" y="2" width="120" height="70" rx="6" fill="#6fbf73" stroke="#1d1b20" stroke-width="4" transform="rotate(-12 82 37)"/>
+    <rect x="48" y="8" width="120" height="70" rx="6" fill="#86d18a" stroke="#1d1b20" stroke-width="4" transform="rotate(8 108 43)"/>
+    <rect x="10" y="50" width="180" height="104" rx="16" fill="#7b4a2b" stroke="#1d1b20" stroke-width="5"/>
+    <rect x="120" y="82" width="70" height="40" rx="10" fill="#5e3820" stroke="#1d1b20" stroke-width="4"/>
+    <circle cx="142" cy="102" r="7" fill="#f2b134" stroke="#1d1b20" stroke-width="3"/>
+  </symbol>
+
+  <symbol id="note" viewBox="0 0 160 84">
+    <rect x="3" y="3" width="154" height="78" rx="8" fill="#86d18a" stroke="#1d1b20" stroke-width="5"/>
+    <circle cx="80" cy="42" r="24" fill="#5aa85e" stroke="#1d1b20" stroke-width="3"/>
+  </symbol>
+
+  <symbol id="bubble" viewBox="0 0 160 140">
+    <path d="M14 14 H146 V100 H70 L36 132 L42 100 H14 Z" fill="#fff" stroke="#1d1b20" stroke-width="6" stroke-linejoin="round"/>
+    <circle cx="50" cy="57" r="9" fill="#1d1b20"/><circle cx="80" cy="57" r="9" fill="#1d1b20"/><circle cx="110" cy="57" r="9" fill="#1d1b20"/>
+  </symbol>
+
+  <symbol id="magnifier" viewBox="0 0 200 200">
+    <path d="M128 128 L186 186" stroke="#1d1b20" stroke-width="30" stroke-linecap="round"/>
+    <path d="M128 128 L186 186" stroke="#8d5a2b" stroke-width="18" stroke-linecap="round"/>
+    <circle cx="80" cy="80" r="66" fill="#d8f1f6" fill-opacity=".55" stroke="#1d1b20" stroke-width="12"/>
+    <path d="M44 62 Q52 38 78 34" stroke="#fff" stroke-width="9" fill="none" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="weight" viewBox="0 0 220 200">
+    <path d="M80 50 Q80 10 110 10 Q140 10 140 50" stroke="#1d1b20" stroke-width="16" fill="none"/>
+    <path d="M50 50 H170 L208 190 H12 Z" fill="#3a3a42" stroke="#1d1b20" stroke-width="6" stroke-linejoin="round"/>
+  </symbol>
+
+  <symbol id="pocket" viewBox="0 0 220 220">
+    <path d="M10 10 H210 V150 Q110 215 10 150 Z" fill="#3c6fb4" stroke="#1d1b20" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M24 24 H196 V144 Q110 196 24 144 Z" fill="none" stroke="#f2b134" stroke-width="4" stroke-dasharray="10 8"/>
+    <path d="M10 10 Q110 70 210 10" fill="#2d5791" stroke="#1d1b20" stroke-width="6"/>
+  </symbol>
+
+  <symbol id="house" viewBox="0 0 220 200">
+    <path d="M10 95 L110 15 L210 95 Z" fill="#e2462c" stroke="#1d1b20" stroke-width="6" stroke-linejoin="round"/>
+    <rect x="30" y="95" width="160" height="100" fill="#f5ecd9" stroke="#1d1b20" stroke-width="6"/>
+    <rect x="92" y="130" width="36" height="65" fill="#8d5a2b" stroke="#1d1b20" stroke-width="5"/>
+    <rect x="45" y="115" width="32" height="30" fill="#bfe3f0" stroke="#1d1b20" stroke-width="5"/>
+    <rect x="143" y="115" width="32" height="30" fill="#bfe3f0" stroke="#1d1b20" stroke-width="5"/>
+  </symbol>
+
+  <!-- stylised field: sky, horizon, staked rows of tomato plants -->
+  <symbol id="field" viewBox="0 0 1080 900">
+    <rect width="1080" height="900" fill="url(#skyG)"/>
+    <circle cx="860" cy="170" r="70" fill="#f7b24a" opacity=".85"/>
+    <path d="M0 330 Q200 300 400 325 T800 315 T1080 320 V900 H0 Z" fill="#9fc27a"/>
+    <g fill="#5f8f4a" opacity=".7"><circle cx="90" cy="320" r="40"/><circle cx="150" cy="310" r="50"/><circle cx="960" cy="312" r="46"/><circle cx="1030" cy="322" r="36"/></g>
+    <path d="M0 380 H1080 V900 H0 Z" fill="#7fae5c"/>
+    <g stroke="#1d1b20" stroke-width="4">
+      <path d="M0 470 H1080" stroke="#c9a46a" stroke-width="18"/><path d="M0 640 H1080" stroke="#c9a46a" stroke-width="26"/><path d="M0 840 H1080" stroke="#c9a46a" stroke-width="34"/>
+    </g>
+    <g fill="#4e8c3a" stroke="#1d1b20" stroke-width="3">
+      <circle cx="60" cy="440" r="26"/><circle cx="200" cy="436" r="30"/><circle cx="340" cy="442" r="26"/><circle cx="480" cy="436" r="30"/><circle cx="620" cy="442" r="26"/><circle cx="760" cy="436" r="30"/><circle cx="900" cy="440" r="26"/><circle cx="1040" cy="436" r="30"/>
+      <circle cx="100" cy="590" r="44"/><circle cx="300" cy="584" r="50"/><circle cx="500" cy="590" r="44"/><circle cx="700" cy="584" r="50"/><circle cx="900" cy="590" r="44"/>
+      <circle cx="40" cy="770" r="62"/><circle cx="320" cy="760" r="70"/><circle cx="600" cy="770" r="62"/><circle cx="880" cy="760" r="70"/>
+    </g>
+    <g stroke="#1d1b20" stroke-width="3" fill="#e3c98f">
+      <rect x="125" y="380" width="8" height="80"/><rect x="405" y="380" width="8" height="80"/><rect x="685" y="380" width="8" height="80"/><rect x="965" y="380" width="8" height="80"/>
+      <rect x="194" y="500" width="12" height="120"/><rect x="594" y="500" width="12" height="120"/><rect x="994" y="500" width="12" height="120"/>
+      <rect x="170" y="650" width="16" height="170"/><rect x="740" y="650" width="16" height="170"/>
+    </g>
+    <path d="M0 400 L1080 395" stroke="#f0ebe0" stroke-width="3"/><path d="M0 520 L1080 512" stroke="#f0ebe0" stroke-width="3"/>
+    <g>
+      <use href="#tomato" x="70" y="570" width="34" height="34"/><use href="#tomato" x="320" y="590" width="30" height="30"/><use href="#tomatoGreen" x="680" y="575" width="30" height="30"/><use href="#tomato" x="890" y="600" width="32" height="32"/>
+      <use href="#tomato" x="300" y="760" width="44" height="44"/><use href="#tomatoGreen" x="600" y="780" width="40" height="40"/><use href="#tomato" x="860" y="770" width="46" height="46"/><use href="#tomato" x="30" y="780" width="40" height="40"/>
+    </g>
+  </symbol>
+
+  <!-- market background: rows of produce -->
+  <symbol id="marketBg" viewBox="0 0 1080 600">
+    <rect width="1080" height="600" fill="#f1dcc0"/>
+    <rect y="0" width="1080" height="120" fill="#e9cba3"/>
+    <g fill="#e2462c" stroke="#1d1b20" stroke-width="4"><path d="M0 0 H1080 V60 H0 Z"/></g>
+    <g fill="#fff"><path d="M60 0 H120 V60 H60 Z"/><path d="M180 0 H240 V60 H180 Z"/><path d="M300 0 H360 V60 H300 Z"/><path d="M420 0 H480 V60 H420 Z"/><path d="M540 0 H600 V60 H540 Z"/><path d="M660 0 H720 V60 H660 Z"/><path d="M780 0 H840 V60 H780 Z"/><path d="M900 0 H960 V60 H900 Z"/><path d="M1020 0 H1080 V60 H1020 Z"/></g>
+    <path d="M0 60 H1080" stroke="#1d1b20" stroke-width="5"/>
+    <use href="#basket" x="-30" y="380" width="330" height="216"/><use href="#basket" x="760" y="380" width="330" height="216"/>
+    <g fill="#7fbf5a" stroke="#1d1b20" stroke-width="4"><ellipse cx="420" cy="520" rx="70" ry="26" transform="rotate(-12 420 520)"/><ellipse cx="520" cy="540" rx="70" ry="26" transform="rotate(8 520 540)"/><ellipse cx="620" cy="515" rx="70" ry="26" transform="rotate(-6 620 515)"/><ellipse cx="560" cy="490" rx="66" ry="24"/></g>
+    <rect y="560" width="1080" height="40" fill="#c98a4b" stroke="#1d1b20" stroke-width="5"/>
+  </symbol>
+</defs>
+</svg>
