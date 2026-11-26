@@ -1,31 +1,49 @@
 // ===== Law 5 props & locations: Mirpur rice hotel, CCTV, phone, social feed, crowd =====
 
-// ---- Hotel front (street view). Centre bottom at (x,y) ----
+// ---- Street scene with the hotel (Mirpur). night=true for the incident ----
+function hotelStreet(t, o = {}) {
+  const night = !!o.night;
+  let g = `<rect width="${W}" height="${H}" fill="url(#${night ? 'gNight' : 'gSky'})"/>`;
+  if (night) for (let i = 0; i < 18; i++) g += `<circle cx="${(i * 211) % W}" cy="${60 + (i * 97) % 500}" r="${1.5 + i % 2}" fill="#fff" opacity="${.3 + .3 * Math.sin(t + i)}"/>`;
+  else g += `<circle cx="860" cy="260" r="80" fill="#F4C46B" opacity=".9"/>`;
+  // neighbour buildings
+  const nb = (x, w, h, col) => { let q = `<rect x="${x}" y="${1400 - h}" width="${w}" height="${h}" fill="${col}"/>`; for (let r = 0; r < Math.floor(h / 150); r++) for (let c = 0; c < Math.floor(w / 110); c++) q += `<rect x="${x + 24 + c * 110}" y="${1400 - h + 40 + r * 150}" width="60" height="80" rx="4" fill="${night ? (((r + c) % 3) ? '#F6D27A' : '#2B3450') : '#8FB3C2'}" opacity="${night ? .85 : 1}"/>`; return q; };
+  g += nb(-60, 220, 1050, night ? '#3B3F55' : '#CDBFA8') + nb(900, 260, 1150, night ? '#363A4F' : '#D3C4AA');
+  // power lines
+  g += `<path d="M-20,560 Q540,660 1100,540 M-20,600 Q540,720 1100,590" stroke="${night ? '#0E1220' : '#3C3C3C'}" stroke-width="4" fill="none"/>`;
+  g += `<rect x="1000" y="420" width="16" height="1000" fill="${night ? '#20243A' : '#6D6D6D'}"/>`;
+  g += hotelFront(540, 1400, 1.0, t, o);
+  // sidewalk + road
+  g += `<rect y="1400" width="${W}" height="70" fill="${night ? '#4A4C5A' : '#B9B3A6'}"/><rect y="1470" width="${W}" height="${H - 1470}" fill="${night ? '#2C2E3A' : '#7E7B75'}"/>`;
+  for (let i = 0; i < 6; i++) g += `<rect x="${i * 200 + 40}" y="1640" width="110" height="14" rx="7" fill="#fff" opacity=".5"/>`;
+  if (night) g += `<ellipse cx="540" cy="1430" rx="460" ry="60" fill="#FFD98A" opacity=".18"/>`;
+  return g;
+}
+// ---- Hotel front (facade). Centre bottom at (x,y) ----
 function hotelFront(x, y, s, t, o = {}) {
+  const night = !!o.night;
   let g = `<g transform="translate(${x},${y}) scale(${s})">`;
-  // building
-  g += `<rect x="-420" y="-860" width="840" height="860" fill="#E4D3B8"/><rect x="-420" y="-860" width="840" height="40" fill="#CDB896"/>`;
-  for (let i = 0; i < 3; i++) g += `<rect x="${-340 + i * 250}" y="-790" width="170" height="150" rx="6" fill="#7FA9B8" stroke="#9C8566" stroke-width="10"/><path d="M${-340 + i * 250},-715 h170" stroke="#9C8566" stroke-width="6"/>`;
+  g += `<rect x="-420" y="-880" width="840" height="880" fill="${night ? '#6E6156' : '#E4D3B8'}"/><rect x="-420" y="-880" width="840" height="40" fill="${night ? '#5A4F46' : '#CDB896'}"/>`;
+  g += `<rect x="-420" y="-880" width="60" height="880" fill="#000" opacity=".08"/><rect x="360" y="-880" width="60" height="880" fill="#000" opacity=".12"/>`;
+  for (let i = 0; i < 3; i++) g += `<rect x="${-340 + i * 250}" y="-810" width="170" height="150" rx="6" fill="${night ? '#F6D27A' : '#7FA9B8'}" stroke="#9C8566" stroke-width="10"/><path d="M${-255 + i * 250},-810 v150" stroke="#9C8566" stroke-width="6"/><rect x="${-350 + i * 250}" y="-650" width="190" height="14" fill="#9C8566"/>`;
+  // AC unit + pipes (Dhaka detail)
+  g += `<rect x="250" y="-640" width="110" height="60" rx="6" fill="#ECEFF1"/><path d="M262,-628 h86 M262,-616 h86 M262,-604 h86" stroke="#B0BEC5" stroke-width="4"/>`;
   // signboard
-  g += `<rect x="-400" y="-600" width="800" height="150" rx="12" fill="#C0392B"/><rect x="-386" y="-586" width="772" height="122" rx="8" fill="none" stroke="#F4D35E" stroke-width="4"/>`;
-  g += `<text x="0" y="-522" text-anchor="middle" font-size="74" font-weight="700" fill="#FFF3C4">জামাল হোটেল</text>`;
-  g += `<text x="0" y="-478" text-anchor="middle" font-size="32" font-weight="600" fill="#F4D35E">ভাত · মাছ · মাংস · ডাল</text>`;
-  // tin awning (striped)
-  for (let i = 0; i < 10; i++) g += `<path d="M${-420 + i * 84},-450 h84 l-10,70 h-84z" fill="${i % 2 ? '#2A9D8F' : '#F6EFE4'}"/>`;
-  // shop opening
-  g += `<rect x="-400" y="-380" width="800" height="380" fill="#4A3426"/><rect x="-400" y="-380" width="800" height="380" fill="url(#gShop)"/>`;
-  // tube light
-  g += `<rect x="-120" y="-366" width="240" height="14" rx="7" fill="#FFFDF0"/><rect x="-140" y="-380" width="280" height="60" fill="#FFFDF0" opacity="${.12 + .03 * Math.sin(t * 20)}"/>`;
-  // inside: rice pot + counter
-  g += deg(-250, -120, .9, t) + `<rect x="-400" y="-110" width="330" height="110" fill="#B5835A"/><rect x="-400" y="-110" width="330" height="12" fill="#C99A70"/>`;
-  // steel tables + stools
-  for (const tx of [40, 250]) g += `<rect x="${tx - 80}" y="-150" width="160" height="14" rx="4" fill="#C9D1D6"/><rect x="${tx - 70}" y="-136" width="8" height="120" fill="#A9B3BA"/><rect x="${tx + 62}" y="-136" width="8" height="120" fill="#A9B3BA"/><ellipse cx="${tx}" cy="-160" rx="40" ry="10" fill="#fff"/>`;
-  // menu board on wall
-  g += menuBoard(250, -300, .55);
-  // CCTV on corner
-  g += cctv(370, -430, .8, t, o.cctvHi);
-  // crowd / queue optional
-  if (o.empty) g += `<rect x="-400" y="-380" width="800" height="380" fill="#000" opacity=".25"/>`;
+  g += `<rect x="-400" y="-580" width="800" height="160" rx="14" fill="#B83227"/><rect x="-400" y="-580" width="800" height="60" rx="14" fill="#fff" opacity=".07"/><rect x="-384" y="-564" width="768" height="128" rx="10" fill="none" stroke="#F4D35E" stroke-width="5"/>`;
+  g += `<text x="0" y="-498" text-anchor="middle" font-size="78" font-weight="700" fill="#FFF3C4">জামাল হোটেল</text>`;
+  g += `<text x="0" y="-450" text-anchor="middle" font-size="32" font-weight="600" fill="#F4D35E">ভাত · মাছ · মাংস · ডাল   |   মিরপুর</text>`;
+  if (night) g += `<rect x="-420" y="-600" width="840" height="200" fill="#FF6B4A" opacity="${.08 + .04 * Math.sin(t * 3)}"/>`;
+  // awning
+  for (let i = 0; i < 10; i++) g += `<path d="M${-420 + i * 84},-420 h84 l-10,74 h-84z" fill="${i % 2 ? '#2A9D8F' : '#F6EFE4'}"/>`;
+  g += `<path d="M-430,-346 h840" stroke="#000" stroke-opacity=".2" stroke-width="10"/>`;
+  // opening
+  g += `<rect x="-400" y="-346" width="800" height="346" fill="${night ? '#3A2A20' : '#4A3426'}"/><rect x="-400" y="-346" width="800" height="346" fill="url(#gShop)"/>`;
+  g += `<rect x="-120" y="-334" width="240" height="14" rx="7" fill="#FFFDF0"/><rect x="-200" y="-330" width="400" height="200" fill="#FFF7D6" opacity="${(night ? .2 : .1) + .03 * Math.sin(t * 20)}"/>`;
+  g += deg(-250, -110, .85, t) + `<rect x="-400" y="-100" width="330" height="100" fill="#B5835A"/><rect x="-400" y="-100" width="330" height="12" fill="#C99A70"/>`;
+  for (const tx of [40, 250]) g += `<rect x="${tx - 80}" y="-140" width="160" height="14" rx="4" fill="#C9D1D6"/><rect x="${tx - 70}" y="-126" width="8" height="120" fill="#A9B3BA"/><rect x="${tx + 62}" y="-126" width="8" height="120" fill="#A9B3BA"/><ellipse cx="${tx}" cy="-150" rx="40" ry="10" fill="#fff"/>`;
+  g += menuBoard(250, -260, .5);
+  g += cctv(370, -400, .8, t, o.cctvHi);
+  if (o.empty) g += `<rect x="-400" y="-346" width="800" height="346" fill="#000" opacity=".35"/>`;
   g += `</g>`;
   return g;
 }
@@ -47,14 +65,26 @@ function cctv(x, y, s, t, hi) {
 }
 // ---- Hotel interior wide (background for incident scenes) ----
 function hotelInterior(t, o = {}) {
-  let s = `<rect width="${W}" height="${H}" fill="#EAD9BF"/><rect y="0" width="${W}" height="120" fill="#D8C3A2"/>`;
+  let s = `<rect width="${W}" height="${H}" fill="#EBDAC0"/>`;
+  // lower wall tiles
+  s += `<rect y="700" width="${W}" height="480" fill="#DCE5E2"/>`;
+  for (let i = 0; i < 12; i++) s += `<path d="M${i * 92},700 v480" stroke="#C3CFCB" stroke-width="3"/>`;
+  for (let j = 0; j < 6; j++) s += `<path d="M0,${700 + j * 80} h${W}" stroke="#C3CFCB" stroke-width="3"/>`;
+  s += `<rect y="690" width="${W}" height="14" fill="#B9C6C1"/>`;
+  // ceiling + fan
+  s += `<rect width="${W}" height="110" fill="#D8C3A2"/><rect x="536" y="110" width="8" height="70" fill="#5A5A5A"/>`;
+  const a = t * 9;
+  s += `<g transform="translate(540,190)">${[0, 120, 240].map(d => `<ellipse rx="170" ry="16" cx="85" fill="#7A7A7A" opacity=".85" transform="rotate(${d + a * 57.3}) "/>`).join('')}<circle r="26" fill="#5A5A5A"/></g>`;
+  // tube light glow
+  s += `<rect x="120" y="270" width="300" height="14" rx="7" fill="#FFFDF0"/><ellipse cx="270" cy="300" rx="260" ry="90" fill="#FFF7D6" opacity=".25"/>`;
+  s += menuBoard(200, 500, .85);
+  s += `<g transform="translate(720,420)"><rect x="-170" y="-64" width="340" height="128" rx="12" fill="#B83227"/><rect x="-158" y="-52" width="316" height="104" rx="8" fill="none" stroke="#F4D35E" stroke-width="4"/><text y="18" text-anchor="middle" font-size="50" font-weight="700" fill="#FFF3C4">জামাল হোটেল</text></g>`;
+  // shelf with jars
+  s += `<rect x="560" y="560" width="360" height="12" fill="#8C6A45"/>` + [0, 1, 2, 3].map(i => `<rect x="${580 + i * 85}" y="${500}" width="60" height="60" rx="10" fill="${['#E9C46A', '#F4A261', '#E76F51', '#2A9D8F'][i]}" opacity=".85"/><rect x="${580 + i * 85}" y="494" width="60" height="12" rx="4" fill="#5A4636"/>`).join('');
+  s += cctv(970, 210, 1, t, o.cctvHi);
+  // floor
   s += `<rect x="0" y="1180" width="${W}" height="${H - 1180}" fill="#B9A386"/>`;
-  for (let i = 0; i < 12; i++) s += `<rect x="${i * 100}" y="1180" width="96" height="${H - 1180}" fill="#C2AE91" opacity="${i % 2 ? .4 : 0}"/>`;
-  s += `<rect x="340" y="150" width="400" height="16" rx="8" fill="#FFFDF0"/><rect x="300" y="160" width="480" height="140" fill="#FFFDF0" opacity=".14"/>`;
-  s += menuBoard(170, 470, .9);
-  s += `<g transform="translate(700,330)"><rect x="-150" y="-60" width="300" height="120" rx="10" fill="#C0392B"/><text y="16" text-anchor="middle" font-size="44" font-weight="700" fill="#FFF3C4">জামাল হোটেল</text></g>`;
-  s += cctv(960, 230, 1, t, o.cctvHi);
-  s += `<rect x="0" y="880" width="${W}" height="40" fill="#C9D1D6" opacity=".9"/>`; // counter rail
+  for (let i = 0; i < 10; i++) s += `<path d="M${i * 120 - 100},${H} L${540 + (i - 4.5) * 40},1180" stroke="#A8927A" stroke-width="3"/>`;
   return s;
 }
 function steelTable(y = 1250) {
