@@ -32,7 +32,9 @@ const out = path.resolve(process.argv[2] || 'output'); fs.mkdirSync(out, { recur
     s += `<text x="540" y="1425" text-anchor="middle" font-size="108" font-weight="700" fill="#fff" stroke="#0B0A18" stroke-width="10" paint-order="stroke">পার্টি দিয়ে <tspan fill="${C.coral}">জেলে!</tspan></text>`;
     s += `<rect x="290" y="1478" width="500" height="8" rx="4" fill="${C.amber}"/>`;
     s += `<text x="540" y="1580" text-anchor="middle" font-size="48" font-weight="700" fill="${C.amber}" letter-spacing="1">Never Outshine the Master</text>`;
-    s += `<text x="540" y="1645" text-anchor="middle" font-size="34" font-weight="500" fill="#ffffffbb">ফুকে ও রাজা চতুর্দশ লুই · ১৬৬১</text>`;
+    s += `<g transform="translate(540,1700)"><rect x="-250" y="-56" width="500" height="112" rx="56" fill="#F8F0DC" stroke="${C.amber}" stroke-width="6"/><text y="22" text-anchor="middle" font-size="62" font-weight="700" fill="#3A1A16">১৬৬১ সাল · ফ্রান্স</text></g>`;
+    s += `<text x="540" y="1650" text-anchor="middle" font-size="0"></text>`;
+    s += `<text x="540" y="1825" text-anchor="middle" font-size="40" font-weight="600" fill="#ffffffdd">নিকোলাস ফুকে ও রাজা চতুর্দশ লুই</text>`;
     const defs = DEFS.replace('</defs>', `<linearGradient id="gSideR" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0B0A18" stop-opacity=".0"/><stop offset=".55" stop-color="#0B0A18" stop-opacity=".1"/><stop offset="1" stop-color="#0B0A18" stop-opacity=".55"/></linearGradient><linearGradient id="gBottom" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B0A18" stop-opacity="0"/><stop offset=".22" stop-color="#0B0A18" stop-opacity=".88"/><stop offset="1" stop-color="#0B0A18" stop-opacity=".97"/></linearGradient></defs>`);
     document.getElementById('stage').innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" font-family="Hind Siliguri">${defs}${s}${vignette(.45)}${grain(.05)}${brandTag(true)}</svg>`;
     document.getElementById('sub').style.opacity = 0;
