@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Hind Siliguri';src:url('fonts/HindSiliguri-Regular.ttf');font-weight:400}
+@font-face{font-family:'Hind Siliguri';src:url('fonts/HindSiliguri-Medium.ttf');font-weight:500}
+@font-face{font-family:'Hind Siliguri';src:url('fonts/HindSiliguri-SemiBold.ttf');font-weight:600}
+@font-face{font-family:'Hind Siliguri';src:url('fonts/HindSiliguri-Bold.ttf');font-weight:700}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:'Hind Siliguri'}
+#stage{position:absolute;inset:0}
+#sub{position:absolute;left:50%;top:1540px;transform:translateX(-50%);max-width:940px;width:max-content;text-align:center;
+ background:rgba(30,20,12,.88);color:#FFF6E6;font-weight:600;font-size:48px;line-height:1.42;padding:20px 40px 16px;border-radius:26px;
+ box-shadow:0 14px 34px rgba(0,0,0,.25);border:2px solid rgba(232,180,90,.55)}
+#sub b{font-weight:700}#sub b.a{color:#F2C46B}#sub b.c{color:#FF7A63}
+</style></head><body><div id="stage-wrap"><svg id="photo" width="1080" height="1920" style="position:absolute;inset:0" xmlns="http://www.w3.org/2000/svg">
+<defs><filter id="pblur" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="26"/></filter>
+<linearGradient id="pfeather" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".14" stop-color="#fff"/><stop offset=".86" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<mask id="pmask"><rect x="-200" y="-200" width="1480" height="2320" fill="url(#pfeather)"/></mask></defs>
+<g id="pg_sajdah" opacity="0"><image href="assets/sajdah.jpg" x="-200" y="-100" width="1480" height="2120" preserveAspectRatio="xMidYMid slice" filter="url(#pblur)"/><rect width="1080" height="1920" fill="#120C08" opacity=".5"/><g id="pw_sajdah"><image href="assets/sajdah.jpg" x="0" y="503.4" width="1080" height="713.3" preserveAspectRatio="xMidYMid slice"/></g><rect width="1080" height="1920" fill="#F2A65A" opacity=".08"/></g><g id="pg_dua" opacity="0"><image href="assets/dua.jpg" x="-200" y="-100" width="1480" height="2120" preserveAspectRatio="xMidYMid slice" filter="url(#pblur)"/><rect width="1080" height="1920" fill="#120C08" opacity=".5"/><g id="pw_dua"><image href="assets/dua.jpg" x="0" y="554.7" width="1080" height="610.7" preserveAspectRatio="xMidYMid slice"/></g><rect width="1080" height="1920" fill="#F2A65A" opacity=".08"/></g></svg>
+<div id="stage"></div></div><div id="sub" style="opacity:0"></div>
+<script src="chars.js"></script><script src="people.js"></script><script src="props.js"></script><script src="scenes.js"></script></body></html>
